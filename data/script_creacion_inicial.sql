@@ -64,3 +64,26 @@ CREATE TABLE [PUNTO_ZIP].ROL_POR_FUNCIONALIDAD(
 	PRIMARY KEY(rol_id, funcionalidad_id)	
 )
 GO
+
+------------------------------LOGIN------------------------------
+
+CREATE PROCEDURE [PUNTO_ZIP].PR_LOGIN @USERNAME NVARCHAR(255),@PASSWORD VARCHAR(255)
+AS
+BEGIN TRY
+	IF (EXISTS(SELECT 1 FROM USUARIO WHERE usuario_username = @USERNAME))
+	BEGIN
+		UPDATE USUARIO SET usuario_intentosLogin = usuario_intentosLogin + 1 WHERE usuario_username = @USERNAME;
+
+		SELECT	U.usuario_password Password, 
+				U.usuario_username Username, 
+				U.usuario_activo Activo, 
+				U.usuario_id Id, 
+				U.usuario_intentosLogin Intentos,  
+				(CASE WHEN U.usuario_password = HashBytes('SHA2_256', @PASSWORD) THEN 1 ELSE 0 END) PasswordMatched
+		FROM [PUNTO_ZIP].USUARIO U WHERE usuario_username = @USERNAME;
+	END
+END TRY
+BEGIN CATCH
+  SELECT 'ERROR', ERROR_MESSAGE()
+END CATCH
+GO
