@@ -42,6 +42,11 @@ IF OBJECT_ID('PUNTO_ZIP.SP_Get_Usuario_Rol') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Get_Usuario_Rol]
 GO
 
+IF OBJECT_ID('PUNTO_ZIP.[PR_Get_Empresas]') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[PR_Get_Empresas]
+GO
+
+
 IF OBJECT_ID('[PUNTO_ZIP].PR_BUSCAR_CLIENTE_POR_DNI') IS NOT NULL
 DROP PROCEDURE [PUNTO_ZIP].PR_BUSCAR_CLIENTE_POR_DNI
 GO
@@ -81,6 +86,14 @@ GO
 
 IF OBJECT_ID('PUNTO_ZIP.CLIENTE') IS NOT NULL
 DROP TABLE [PUNTO_ZIP].CLIENTE
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.EMPRESA') IS NOT NULL
+DROP TABLE [PUNTO_ZIP].EMPRESA
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.RUBRO') IS NOT NULL
+DROP TABLE [PUNTO_ZIP].RUBRO
 GO
 ------------------------------DROP SCHEMA------------------------------------
 IF SCHEMA_ID('PUNTO_ZIP') IS NOT NULL
@@ -139,6 +152,22 @@ CREATE TABLE [PUNTO_ZIP].CLIENTE(
 	cliente_codigo_postal nvarchar(255) NOT NULL,
 	cliente_telefono nvarchar(255) NOT NULL,
 	cliente_activo bit default 1
+)
+GO
+
+CREATE TABLE PUNTO_ZIP.RUBRO(
+	rubro_id int PRIMARY KEY IDENTITY(1,1),
+	rubro_descripcion nvarchar(50) NOT NULL
+)
+GO
+
+CREATE TABLE [PUNTO_ZIP].EMPRESA(
+	empresa_id int PRIMARY KEY IDENTITY(1,1),
+	empresa_nombre nvarchar(255) NOT NULL,
+	empresa_cuit nvarchar(50) NOT NULL,
+	empresa_direccion nvarchar(255) NOT NULL,
+	empresa_rubro int FOREIGN KEY REFERENCES PUNTO_ZIP.RUBRO NOT NULL,
+	empresa_habilitada BIT NOT NULL
 )
 GO
 
@@ -360,6 +389,18 @@ CREATE PROCEDURE [PUNTO_ZIP].[PR_Get_Roles]
 AS
   BEGIN TRY
 	SELECT R.rol_id ID, R.rol_nombre Rol,R.rol_habilitado Habilitado FROM [PUNTO_ZIP].ROL R
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+----------------------------------EMPRESAS-----------------------------------------------
+CREATE PROCEDURE [PUNTO_ZIP].[PR_Get_Empresas]
+AS
+  BEGIN TRY
+	SELECT e.empresa_nombre Nombre, e.empresa_cuit Cuit, e.empresa_direccion Direccion, r.rubro_descripcion Rubro  FROM [PUNTO_ZIP].EMPRESA e
+	 INNER JOIN [PUNTO_ZIP].RUBRO AS r
+      ON r.rubro_id = e.empresa_rubro
   END TRY
   BEGIN CATCH
     SELECT 'ERROR', ERROR_MESSAGE()

@@ -41,7 +41,7 @@
             this.Cmb_Roles.Name = "Cmb_Roles";
             this.Cmb_Roles.Size = new System.Drawing.Size(175, 21);
             this.Cmb_Roles.TabIndex = 0;
-            //this.Cmb_Roles.SelectedIndexChanged += new System.EventHandler(this.Cmb_Roles_SelectedIndexChanged);
+            this.Cmb_Roles.SelectedIndexChanged += new System.EventHandler(this.Cmb_Roles_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -62,7 +62,7 @@
             this.Btn_Aceptar.TabIndex = 2;
             this.Btn_Aceptar.Text = "Aceptar";
             this.Btn_Aceptar.UseVisualStyleBackColor = true;
-            //this.Btn_Aceptar.Click += new System.EventHandler(this.Btn_Aceptar_Click);
+            this.Btn_Aceptar.Click += new System.EventHandler(this.Btn_Aceptar_Click);
             // 
             // Cl_Roles
             // 

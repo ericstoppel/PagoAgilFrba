@@ -1,4 +1,5 @@
 ﻿using PagoAgilFrba.Abm_Cliente;
+using PagoAgilFrba.AbmEmpresa;
 using PagoAgilFrba.AbmRol;
 using PagoAgilFrba.Conexiones;
 using System;
@@ -66,6 +67,13 @@ namespace PagoAgilFrba.Menus
         {
             Cl_Abm_Cliente cliente = new Cl_Abm_Cliente();
             cliente.ShowDialog();
+        }
+
+        private void Btn_Empresa_Click(object sender, EventArgs e)
+        {
+
+            EmpresaForm empresa = new EmpresaForm();
+            empresa.ShowDialog();
         }
 
       
