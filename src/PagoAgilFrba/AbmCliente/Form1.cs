@@ -46,6 +46,11 @@ namespace PagoAgilFrba.Abm_Cliente
                 MessageBox.Show("Por Favor completar todos los campos");
                 return false;
             }
+            if (txtCodigoPostal.Text == "")
+            {
+                MessageBox.Show("Por Favor completar todos los campos");
+                return false;
+            }
             return true;
         }
 
@@ -56,6 +61,7 @@ namespace PagoAgilFrba.Abm_Cliente
             txtMail.Clear();
             txtApellido.Clear();
             txtTelefono.Clear();
+            txtCodigoPostal.Clear();
             dtpFechaNac.Text = "";
             txtDireccion.Clear();
             chkActivo.Checked = false;
@@ -72,10 +78,10 @@ namespace PagoAgilFrba.Abm_Cliente
         private void ActualizarLista()
         {
             SqlServer sql = new SqlServer();
-            var parametros = new Dictionary<string, string>();
-            parametros.Add("DNI", txtBuscarDNI.Text);
+            var parametros = new Dictionary<string, string>();            
             parametros.Add("NOMBRE", txtBuscarNombre.Text);
             parametros.Add("APELLIDO", txtBuscarApellido.Text);
+            parametros.Add("DNI", txtBuscarDNI.Text);
 
             DataTable table = sql.EjecutarSp("PR_LISTADO_SELECCION_ABM_CLIENTE", parametros);
 
@@ -103,6 +109,7 @@ namespace PagoAgilFrba.Abm_Cliente
                 parametros.Add("TELEFONO", txtTelefono.Text);
                 parametros.Add("FECHANAC", dtpFechaNac.Value.ToString());
                 parametros.Add("DIRECCION", txtDireccion.Text);
+                parametros.Add("CODIGOPOSTAL", txtCodigoPostal.Text);
                 parametros.Add("HABILITADO", chkActivo.Checked.ToString());
 
                 DataTable table = sql.EjecutarSp("PR_INSERTAR_MODIFICAR_CLIENTE", parametros);

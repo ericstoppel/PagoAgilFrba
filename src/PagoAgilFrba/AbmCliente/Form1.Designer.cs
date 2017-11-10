@@ -37,6 +37,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.txtBuscarDNI = new System.Windows.Forms.TextBox();
+            this.labelCodigoPostal = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnCrear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -44,6 +45,7 @@
             this.chkActivo = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtDireccion = new System.Windows.Forms.TextBox();
+            this.txtCodigoPostal = new System.Windows.Forms.TextBox();
             this.dtpFechaNac = new System.Windows.Forms.DateTimePicker();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -150,6 +152,16 @@
             this.txtBuscarDNI.Size = new System.Drawing.Size(181, 20);
             this.txtBuscarDNI.TabIndex = 33;
             // 
+            // labelCodigoPostal
+            // 
+            this.labelCodigoPostal.AutoSize = true;
+            this.labelCodigoPostal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCodigoPostal.Location = new System.Drawing.Point(7, 234);
+            this.labelCodigoPostal.Name = "labelCodigoPostal";
+            this.labelCodigoPostal.Size = new System.Drawing.Size(92, 16);
+            this.labelCodigoPostal.TabIndex = 46;
+            this.labelCodigoPostal.Text = "Codigo postal";
+            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(41, 295);
@@ -176,6 +188,7 @@
             this.groupBox1.Controls.Add(this.chkActivo);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtDireccion);
+            this.groupBox1.Controls.Add(this.txtCodigoPostal);
             this.groupBox1.Controls.Add(this.btnCrear);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.dtpFechaNac);
@@ -187,6 +200,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.labelCodigoPostal);
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.txtDNI);
             this.groupBox1.Controls.Add(this.txtMail);
@@ -211,7 +225,7 @@
             // chkActivo
             // 
             this.chkActivo.AutoSize = true;
-            this.chkActivo.Location = new System.Drawing.Point(10, 239);
+            this.chkActivo.Location = new System.Drawing.Point(9, 264);
             this.chkActivo.Margin = new System.Windows.Forms.Padding(2);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(56, 17);
@@ -236,6 +250,13 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(238, 20);
             this.txtDireccion.TabIndex = 45;
+            // 
+            // txtCodigoPostal
+            // 
+            this.txtCodigoPostal.Location = new System.Drawing.Point(105, 233);
+            this.txtCodigoPostal.Name = "txtCodigoPostal";
+            this.txtCodigoPostal.Size = new System.Drawing.Size(206, 20);
+            this.txtCodigoPostal.TabIndex = 45;
             // 
             // dtpFechaNac
             // 
@@ -372,6 +393,8 @@
         private System.Windows.Forms.CheckBox chkActivo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtDireccion;
+        private System.Windows.Forms.Label labelCodigoPostal;
+        private System.Windows.Forms.TextBox txtCodigoPostal;
         private System.Windows.Forms.DateTimePicker dtpFechaNac;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label label4;
