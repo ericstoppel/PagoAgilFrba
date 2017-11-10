@@ -7,6 +7,41 @@ IF OBJECT_ID('[PUNTO_ZIP].PR_LOGIN') IS NOT NULL
 DROP PROCEDURE [PUNTO_ZIP].PR_LOGIN
 GO
 
+IF OBJECT_ID('PUNTO_ZIP.PR_USUARIO_LOGUEADO') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.PR_USUARIO_LOGUEADO;
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.SP_Create_Rol') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[SP_Create_Rol]
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.SP_Update_Rol') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[SP_Update_Rol]
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.SP_Update_Funcionalidad_Por_Rol') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[SP_Update_Funcionalidad_Por_Rol]
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.PR_INHABILITAR_ROL') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[PR_INHABILITAR_ROL]
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.SP_Get_Funcionalidades_Rol') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[SP_Get_Funcionalidades_Rol]
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.PR_Get_Funcionalidades') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[PR_Get_Funcionalidades]
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.PR_Get_Roles') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[PR_Get_Roles]
+GO
+IF OBJECT_ID('PUNTO_ZIP.SP_Get_Usuario_Rol') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[SP_Get_Usuario_Rol]
+GO
+
 IF OBJECT_ID('[PUNTO_ZIP].PR_BUSCAR_CLIENTE_POR_DNI') IS NOT NULL
 DROP PROCEDURE [PUNTO_ZIP].PR_BUSCAR_CLIENTE_POR_DNI
 GO
@@ -107,8 +142,24 @@ CREATE TABLE [PUNTO_ZIP].CLIENTE(
 )
 GO
 
+------------------------------PROCEDURES-------------------------
 
 ------------------------------LOGIN------------------------------
+INSERT INTO PUNTO_ZIP.USUARIO
+(usuario_username, usuario_password, usuario_activo) VALUES ('admin', HASHBYTES('SHA2_256','w23e'),1);
+GO
+
+INSERT INTO PUNTO_ZIP.ROL
+(rol_habilitado, rol_nombre) VALUES (1, 'Administrador')
+GO
+
+INSERT INTO PUNTO_ZIP.ROL
+(rol_habilitado, rol_nombre) VALUES (1, 'Cobrador')
+GO
+
+INSERT INTO PUNTO_ZIP.ROL_POR_USUARIO
+(rol_id, usuario_id) VALUES (1,1)
+GO
 
 CREATE PROCEDURE [PUNTO_ZIP].PR_LOGIN @USERNAME NVARCHAR(255),@PASSWORD VARCHAR(255)
 AS
@@ -131,6 +182,32 @@ BEGIN CATCH
 END CATCH
 GO
 
+CREATE PROCEDURE [PUNTO_ZIP].PR_USUARIO_LOGUEADO @USERNAME NVARCHAR(255)
+AS
+BEGIN TRY
+	IF (EXISTS(SELECT 1 FROM USUARIO WHERE usuario_username = @USERNAME))
+	BEGIN
+		UPDATE USUARIO SET usuario_intentosLogin = 0, usuario_activo = 1 WHERE usuario_username = @USERNAME;
+	END
+END TRY
+BEGIN CATCH
+  SELECT 'ERROR', ERROR_MESSAGE()
+END CATCH
+GO
+
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Get_Usuario_Rol]
+  @idUsuario INT
+AS
+  BEGIN TRY
+    SELECT R.rol_nombre Nombre, RU.rol_id ID FROM [PUNTO_ZIP].ROL_POR_USUARIO RU
+    INNER JOIN [PUNTO_ZIP].ROL R
+        ON RU.rol_id = R.rol_id
+    WHERE RU.usuario_id = @idUsuario
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
 ------------------------------ABM CLIENTE------------------------------
 CREATE PROCEDURE [PUNTO_ZIP].PR_BUSCAR_CLIENTE_POR_DNI @DNI NUMERIC(18,0)
 AS
@@ -144,13 +221,13 @@ BEGIN CATCH
 END CATCH
 GO
 
-CREATE PROCEDURE [PUNTO_ZIP].PR_INSERTAR_MODIFICAR_CLIENTE @NOMBRE NVARCHAR (255),@APELLIDO NVARCHAR (255),@DNI BIGINT,@DIRECCION NVARCHAR (255),@TELEFONO NVARCHAR (255),@MAIL NVARCHAR (255),@FECHANAC DATETIME,@HABILITADO BIT
+CREATE PROCEDURE [PUNTO_ZIP].PR_INSERTAR_MODIFICAR_CLIENTE @NOMBRE NVARCHAR (255),@APELLIDO NVARCHAR (255),@DNI BIGINT,@DIRECCION NVARCHAR (255), @CODIGOPOSTAL NVARCHAR (255),@TELEFONO NVARCHAR (255),@MAIL NVARCHAR (255),@FECHANAC DATETIME,@HABILITADO BIT
 AS
 BEGIN TRY
 	IF(NOT EXISTS(SELECT 1 FROM CLIENTE WHERE CLIENTE.cliente_dni = @DNI)) --NUEVO CLIENTE
-		INSERT INTO [PUNTO_ZIP].CLIENTE(cliente_nombre,cliente_apellido,cliente_dni,cliente_direccion,cliente_telefono,cliente_mail,cliente_fechaNac,cliente_activo) VALUES(@NOMBRE ,@APELLIDO ,@DNI,@DIRECCION,@TELEFONO,@MAIL,@FECHANAC,@HABILITADO)
+		INSERT INTO [PUNTO_ZIP].CLIENTE(cliente_nombre,cliente_apellido,cliente_dni,cliente_direccion,cliente_codigo_postal,cliente_telefono,cliente_mail,cliente_fechaNac,cliente_activo) VALUES(@NOMBRE ,@APELLIDO ,@DNI,@DIRECCION,@CODIGOPOSTAL,@TELEFONO,@MAIL,@FECHANAC,@HABILITADO)
 	ELSE
-		UPDATE [PUNTO_ZIP].CLIENTE SET cliente_apellido = @APELLIDO,cliente_direccion = @DIRECCION,cliente_dni = @DNI,cliente_fechaNac = @FECHANAC,cliente_mail = @MAIL,cliente_nombre = @NOMBRE,cliente_telefono = @TELEFONO,cliente_activo = @HABILITADO WHERE cliente_dni = @DNI
+		UPDATE [PUNTO_ZIP].CLIENTE SET cliente_apellido = @APELLIDO,cliente_direccion = @DIRECCION,cliente_codigo_postal=@CODIGOPOSTAL,cliente_dni = @DNI,cliente_fechaNac = @FECHANAC,cliente_mail = @MAIL,cliente_nombre = @NOMBRE,cliente_telefono = @TELEFONO,cliente_activo = @HABILITADO WHERE cliente_dni = @DNI
 END TRY
 BEGIN CATCH
   SELECT 'ERROR', ERROR_MESSAGE()
@@ -180,4 +257,111 @@ END TRY
 BEGIN CATCH
   SELECT 'ERROR', ERROR_MESSAGE()
 END CATCH
+GO
+------------------------------ABM ROL------------------------------
+
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Create_Rol]
+  @nombre_rol VARCHAR(255),
+  @habilitado BIT
+AS
+  BEGIN TRY
+    INSERT INTO [PUNTO_ZIP].ROL (rol_habilitado, rol_nombre) VALUES(@habilitado, @nombre_rol);
+
+	SELECT SCOPE_IDENTITY();
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Update_Rol]
+  @ID NVARCHAR(255),
+  @habilitado BIT,
+  @nuevo_nombre VARCHAR(255)
+AS
+  BEGIN TRY
+	 UPDATE [PUNTO_ZIP].ROL SET rol_habilitado = @habilitado, rol_nombre = @nuevo_nombre WHERE rol_id = @ID
+	  IF(@habilitado = 0 )
+		DELETE FROM [PUNTO_ZIP].ROL_POR_USUARIO WHERE rol_id = @ID
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+ GO
+ 
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Update_Funcionalidad_Por_Rol]
+  @ID_Rol INTEGER,
+  @funcionalidad_nombre VARCHAR(255),
+  @habilitado bit
+AS
+  BEGIN TRY
+    DECLARE @ID_Funcionalidad NUMERIC(18)
+    DECLARE @ID_Rol_Aux NUMERIC(18)
+    DECLARE @ID_Funcionalidad_Aux NUMERIC(18)
+
+    SELECT @ID_Funcionalidad = funcionalidad_id FROM [PUNTO_ZIP].FUNCIONALIDAD WHERE funcionalidad_descripcion = @funcionalidad_nombre
+
+    SELECT @ID_Rol_Aux = rol_id, @ID_Funcionalidad_Aux = funcionalidad_id FROM [PUNTO_ZIP].ROL_POR_FUNCIONALIDAD WHERE rol_id = @ID_Rol AND funcionalidad_id = @ID_Funcionalidad
+
+    IF @ID_Rol_Aux IS NOT NULL AND @ID_Funcionalidad_Aux IS NOT NULL
+	BEGIN
+	  IF(@habilitado = 0)
+		 DELETE FROM [PUNTO_ZIP].ROL_POR_FUNCIONALIDAD WHERE funcionalidad_id = @ID_Funcionalidad_Aux AND rol_id = @ID_Rol_Aux
+    END
+	ELSE IF @habilitado = 1
+      INSERT INTO [PUNTO_ZIP].[ROL_POR_FUNCIONALIDAD](funcionalidad_id, rol_id) VALUES (@ID_Funcionalidad, @ID_Rol)
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
+CREATE PROCEDURE [PUNTO_ZIP].PR_INHABILITAR_ROL @ID_ROL INT
+AS
+DECLARE @NOMBRE_ROL NVARCHAR(50)
+BEGIN TRY
+	UPDATE [PUNTO_ZIP].ROL SET rol_habilitado = 0 WHERE rol_id = @ID_ROL
+
+	DELETE FROM [PUNTO_ZIP].ROL_POR_USUARIO WHERE rol_id = @ID_ROL
+END TRY
+BEGIN CATCH
+  SELECT 'ERROR', ERROR_MESSAGE()
+END CATCH
+GO
+
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Get_Funcionalidades_Rol]
+  @nombre_rol VARCHAR(255)
+AS
+  BEGIN TRY
+    SELECT f.funcionalidad_descripcion AS Funcionalidad FROM [PUNTO_ZIP].ROL_POR_FUNCIONALIDAD AS rf
+      INNER JOIN [PUNTO_ZIP].FUNCIONALIDAD AS f
+      ON f.funcionalidad_id = rf.funcionalidad_id
+      INNER JOIN [PUNTO_ZIP].ROL AS r
+      ON rf.rol_id = r.rol_id
+        WHERE r.rol_nombre = @nombre_rol
+    ORDER BY Funcionalidad
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
+CREATE PROCEDURE [PUNTO_ZIP].[PR_Get_Funcionalidades]
+AS
+  BEGIN TRY
+	SELECT F.funcionalidad_descripcion AS Funcionalidades FROM [PUNTO_ZIP].FUNCIONALIDAD F
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
+CREATE PROCEDURE [PUNTO_ZIP].[PR_Get_Roles]
+AS
+  BEGIN TRY
+	SELECT R.rol_id ID, R.rol_nombre Rol,R.rol_habilitado Habilitado FROM [PUNTO_ZIP].ROL R
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
 GO
