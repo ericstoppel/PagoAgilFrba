@@ -21,6 +21,22 @@ namespace PagoAgilFrba.Funcionalidades
     }
     class LLenarCombo
     {
+        public static ComboBox FillComboBox(ComboBox combo, string procedure)
+        {
+            SqlServer sql = new SqlServer();
+
+            DataTable tabla = sql.EjecutarSp(procedure);
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+                return null;
+            }
+            combo.DataSource = tabla;
+            combo.DisplayMember = "Nombre";
+            combo.ValueMember = "ID";
+            return combo;
+        }
+
         public static ComboBox FillComboBox(ComboBox combo, string procedure, int param1)
         {
             var lista1 = new Dictionary<string, string>();
