@@ -1,4 +1,6 @@
-﻿using PagoAgilFrba.Conexiones;
+﻿using PagoAgilFrba.Abm_Cliente;
+using PagoAgilFrba.AbmRol;
+using PagoAgilFrba.Conexiones;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,5 +44,32 @@ namespace PagoAgilFrba.Menus
                 }
             }
         }
+
+        public int getUsuario()
+        {
+            return IdUsuario;
+        }
+      
+
+        private void MenuInicial_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Rol_Click(object sender, EventArgs e)
+        {
+            Cl_Abm_Rol rol = new Cl_Abm_Rol();
+            rol.ShowDialog();
+        }
+
+        private void Btn_ABM_Cliente_Click(object sender, EventArgs e)
+        {
+            Cl_Abm_Cliente cliente = new Cl_Abm_Cliente();
+            cliente.ShowDialog();
+        }
+
+      
+
+       
     }
 }

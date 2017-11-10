@@ -111,6 +111,28 @@ namespace PagoAgilFrba.Conexiones
             return dataTable;
         }
 
+        public DataTable EjecutarSp(string procedure)
+        {
+            SqlCommand cmdCommand = new SqlCommand();
+            SqlDataAdapter dataAdapter;
+            DataTable dataTable = new DataTable();
+            try
+            {
+                cmdCommand.CommandType = CommandType.StoredProcedure;
+                cmdCommand.Connection = AbrirConnection();
+                cmdCommand.CommandText = "[" + Settings.Default.SQL_Schema + "].[" + procedure + "]";
+                dataAdapter = new SqlDataAdapter(cmdCommand);
+                dataAdapter.Fill(dataTable);
+                CerraConnection(cmdCommand.Connection);
+                cmdCommand.Dispose();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return dataTable;
+        }
+
 
 
 

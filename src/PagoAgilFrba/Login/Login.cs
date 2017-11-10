@@ -19,6 +19,16 @@ namespace PagoAgilFrba.Login
         private int _intentos = 0;
         private int _idUsuario;
 
+        private static string GetStringFromHash(byte[] hash)
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                result.Append(hash[i].ToString());
+            }
+            return result.ToString();
+        }
+
         public Cl_Login()
         {
             InitializeComponent();
@@ -84,6 +94,28 @@ namespace PagoAgilFrba.Login
             return true;
         }
 
+        public void LevantarRol(string rol)
+        {
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            DataTable tabla;
+            this.RolUsuario = rol;
+            listaParametros.Add("Nombre_Rol", rol);
+            tabla = sql.EjecutarSp("SP_Get_Funcionalidades_Rol", listaParametros);
+            foreach (Control subchild in this.Controls)
+            {
+                for (int i = 0; i < tabla.Rows.Count; i++)
+                {
+                    if (subchild.Name == tabla.Rows[i][0].ToString())
+                    {
+                        subchild.Enabled = tabla.Rows[i][1].Equals(true);
+                        subchild.Visible = tabla.Rows[i][1].Equals(true);
+                    }
+                }
+            }
+        }
+
+
         private string LoguearUsuario(out bool resultado, out DataTable userData)
         {
             string mensaje = "";
@@ -98,7 +130,11 @@ namespace PagoAgilFrba.Login
 
             DataTable dataTable = sqlServer.EjecutarSp("PR_LOGIN", listaParametros);
 
-            if (dataTable.Rows[0].ItemArray[0].ToString() == "ERROR")
+            if (dataTable.Rows.Count == 0) {
+                resultado = false;
+                mensaje = "Password o Usuario Incorrecto";
+            }
+            else if (dataTable.Rows[0].ItemArray[0].ToString() == "ERROR")
             {
                 resultado = false;
                 mensaje = dataTable.Rows[0].ItemArray[1].ToString();
