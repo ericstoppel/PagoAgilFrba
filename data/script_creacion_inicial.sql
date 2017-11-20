@@ -62,6 +62,47 @@ GO
 IF OBJECT_ID('[PUNTO_ZIP].PR_LISTADO_SELECCION_ABM_CLIENTE') IS NOT NULL
 DROP PROCEDURE [PUNTO_ZIP].PR_LISTADO_SELECCION_ABM_CLIENTE
 GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Datos') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Datos
+GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Clientes') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Clientes
+GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Empresas') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Empresas
+GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Facturas') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Facturas
+GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Items_Factura') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Items_Factura
+GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Medios_Pago') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Medios_Pago
+GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Pagos') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Pagos
+GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Rendiciones') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Rendiciones
+GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Rubros') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Rubros
+GO
+
+IF OBJECT_ID('[PUNTO_ZIP].SP_Migrar_Sucursales') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SP_Migrar_Sucursales
+GO
+
 ------------------------------DROP DE TABLAS------------------------------
 
 IF OBJECT_ID('PUNTO_ZIP.USUARIO_ROL') IS NOT NULL
@@ -441,6 +482,153 @@ AS
   END CATCH
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Clientes]
+AS
+BEGIN
+	INSERT INTO PUNTO_ZIP.Cliente (nombre, apellido, dni, mail, direccion, codigo_postal, fecha_nacimiento, activo)
+	(SELECT DISTINCT [Cliente-Nombre], [Cliente-Apellido],CAST([Cliente-Dni] AS nvarchar(255)),
+					Cliente_Mail, Cliente_Direccion, Cliente_Codigo_Postal, [Cliente-Fecha_Nac], 1 activo
+	FROM gd_esquema.Maestra
+	GROUP BY [Cliente-Nombre], [Cliente-Apellido],CAST([Cliente-Dni] AS nvarchar(255)),
+						  Cliente_Mail, Cliente_Direccion, Cliente_Codigo_Postal, [Cliente-Fecha_Nac])
+				
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Empresas]
+AS
+BEGIN
+	INSERT INTO PUNTO_ZIP.Empresa (nombre, direccion, cuit, activo, id_rubro)
+	SELECT DISTINCT
+		Empresa_Nombre, Empresa_Direccion, Empresa_Cuit, 1,
+		(SELECT id FROM PUNTO_ZIP.Rubro WHERE nombre = m.Rubro_Descripcion)
+	FROM gd_esquema.Maestra m
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Facturas]
+
+AS
+BEGIN
+	INSERT INTO PUNTO_ZIP.Factura (numero_factura, fecha_alta, fecha_vencimiento, total, id_cliente , id_empresa)
+	SELECT DISTINCT
+		Nro_Factura, Factura_Fecha, Factura_Fecha_Vencimiento, Factura_Total,
+		(SELECT id FROM PUNTO_ZIP.Cliente c WHERE c.dni = ma.[Cliente-Dni]) id_cliente,
+		(SELECT id FROM PUNTO_ZIP.Empresa e WHERE e.cuit = ma.Empresa_Cuit AND e.nombre = ma.Empresa_Nombre) id_empresa
+	FROM gd_esquema.Maestra ma;
+	UPDATE PUNTO_ZIP.Factura
+	SET id_rendicion = (SELECT DISTINCT TOP 1 id FROM PUNTO_ZIP.Rendicion r
+						  INNER JOIN gd_esquema.Maestra m ON r.numero = m.Rendicion_Nro
+						  WHERE m.Nro_Factura = numero_factura);
+END
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Items_Factura]
+AS
+BEGIN
+	INSERT INTO PUNTO_ZIP.Item_Factura (monto, cantidad, id_factura)
+	SELECT ItemFactura_Monto, ItemFactura_Cantidad,
+	  (SELECT id FROM PUNTO_ZIP.Factura f where f.numero_factura = m.Nro_Factura) id_factura
+	FROM gd_esquema.Maestra m
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Medios_Pago]
+AS
+BEGIN
+	INSERT INTO PUNTO_ZIP.Medio_Pago(nombre) 
+	SELECT DISTINCT FormaPagoDescripcion FROM gd_esquema.Maestra WHERE FormaPagoDescripcion IS NOT NULL
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Pagos]
+AS
+BEGIN
+	INSERT INTO PUNTO_ZIP.Pago (numero, fecha, importe, id_factura, id_medio_pago, id_sucursal, id_cliente)
+	SELECT DISTINCT Pago_nro, Pago_Fecha, Total,
+			(SELECT id FROM PUNTO_ZIP.Factura f WHERE f.numero_factura = m.Nro_Factura) id_factura,
+			(SELECT id FROM PUNTO_ZIP.Medio_Pago mp WHERE mp.nombre = m.FormaPagoDescripcion) id_medio_pago,
+			(SELECT id FROM PUNTO_ZIP.Sucursal s WHERE s.nombre = m.Sucursal_Nombre) id_sucursal,
+			(SELECT id FROM PUNTO_ZIP.Cliente c WHERE c.dni = m.[Cliente-Dni]) id_cliente
+	FROM gd_esquema.Maestra m
+	WHERE Pago_nro IS NOT NULL
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Rendiciones]
+AS
+BEGIN
+	INSERT INTO PUNTO_ZIP.Rendicion (numero, fecha_rendicion, porcentaje_comision)
+	(SELECT DISTINCT Rendicion_Nro, Rendicion_Fecha , (( ItemRendicion_Importe / Factura_Total) * 100) comision
+	FROM gd_esquema.Maestra
+	WHERE Rendicion_Nro IS NOT NULL);
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Rubros]
+AS
+BEGIN
+	INSERT INTO PUNTO_ZIP.Rubro (nombre)
+	SELECT DISTINCT Rubro_Descripcion FROM gd_esquema.Maestra GROUP BY Rubro_Descripcion
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Sucursales]
+AS
+BEGIN
+	INSERT INTO PUNTO_ZIP.Sucursal (nombre, direccion, codigo_postal, activo)
+	SELECT DISTINCT Sucursal_Nombre, Sucursal_Dirección, Sucursal_Codigo_Postal, 1 activo
+	FROM gd_esquema.Maestra
+	WHERE Sucursal_Nombre IS NOT NULL
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Migrar_Datos]
+AS
+BEGIN
+	EXEC PUNTO_ZIP.SP_Migrar_Rubros;
+	EXEC PUNTO_ZIP.SP_Migrar_Empresas;
+	EXEC PUNTO_ZIP.SP_Migrar_Sucursales;
+	EXEC PUNTO_ZIP.SP_Migrar_Medios_Pago;
+	EXEC PUNTO_ZIP.SP_Migrar_Clientes;
+	EXEC PUNTO_ZIP.SP_Migrar_Rendiciones;
+	EXEC PUNTO_ZIP.SP_Migrar_Facturas;
+	EXEC PUNTO_ZIP.SP_Migrar_Items_Factura;
+	EXEC PUNTO_ZIP.SP_Migrar_Pagos;
+END
+
 /****** Object:  Table [PUNTO_ZIP].[Cliente]    Script Date: 19/11/2017 10:56:45 p.m. ******/
 SET ANSI_NULLS ON
 GO
@@ -448,12 +636,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [PUNTO_ZIP].[Cliente](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[nombre] [nvarchar](50) NOT NULL,
-	[apellido] [nvarchar](50) NOT NULL,
-	[dni] [nvarchar](50) NOT NULL,
-	[mail] [nvarchar](50) NOT NULL,
-	[direccion] [nvarchar](50) NOT NULL,
-	[codigo_postal] [nvarchar](50) NOT NULL,
+	[nombre] [nvarchar](255) NOT NULL,
+	[apellido] [nvarchar](255) NOT NULL,
+	[dni] [nvarchar](255) NOT NULL,
+	[mail] [nvarchar](255) NOT NULL,
+	[direccion] [nvarchar](255) NOT NULL,
+	[codigo_postal] [nvarchar](255) NOT NULL,
 	[fecha_nacimiento] [date] NOT NULL,
 	[activo] [tinyint] NOT NULL,
  CONSTRAINT [PK_Cliente] PRIMARY KEY CLUSTERED 
@@ -598,7 +786,7 @@ CREATE TABLE [PUNTO_ZIP].[Pago](
 	[numero] [numeric](18, 0) NOT NULL,
 	[fecha] [date] NOT NULL,
 	[importe] [decimal](18, 0) NOT NULL,
-	[id_usuario] [int] NOT NULL,
+	[id_usuario] [int] NULL,
 	[id_sucursal] [int] NOT NULL,
 	[id_medio_pago] [int] NOT NULL,
 	[id_cliente] [int] NOT NULL,
@@ -617,6 +805,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [PUNTO_ZIP].[Rendicion](
 	[id] [int] IDENTITY(1,1) NOT NULL,
+	[numero] [nvarchar](50) NOT NULL,
 	[fecha_rendicion] [date] NOT NULL,
 	[porcentaje_comision] [float] NOT NULL,
  CONSTRAINT [PK_Rendicion] PRIMARY KEY CLUSTERED 
@@ -666,12 +855,12 @@ GO
 CREATE TABLE [PUNTO_ZIP].[Rubro](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[nombre] [nvarchar](50) NULL,
-	[descripcion] [text] NULL,
- CONSTRAINT [PK_Rubro] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Rubro] PRIMARY KEY CLUSTERE
+ D 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
 /****** Object:  Table [PUNTO_ZIP].[Sucursal]    Script Date: 19/11/2017 10:56:45 p.m. ******/
@@ -843,7 +1032,13 @@ REFERENCES [PUNTO_ZIP].[Usuario] ([id])
 GO
 ALTER TABLE [PUNTO_ZIP].[Usuario_Sucursal] CHECK CONSTRAINT [FK_Usuario_Sucursal_Usuario]
 GO
+
+EXEC PUNTO_ZIP.SP_Migrar_Datos;
+
 USE [master]
 GO
 ALTER DATABASE [GD2C2017] SET  READ_WRITE 
+GO
+
+USE [GD2C2017]
 GO
