@@ -43,7 +43,7 @@ namespace PagoAgilFrba.Funcionalidades
             SqlServer sql = new SqlServer();
 
             //nombre y valor
-            lista1.Add("idUsuario", param1.ToString());
+            lista1.Add("id_usuario", param1.ToString());
 
             DataTable tabla = sql.EjecutarSp(procedure, lista1);
             if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")

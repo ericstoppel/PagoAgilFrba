@@ -1036,6 +1036,23 @@ EXEC PUNTO_ZIP.SP_Migrar_Datos;
 
 USE [master]
 GO
+
+INSERT INTO PUNTO_ZIP.Usuario (username, password, nombre, intentos_login, activo)
+VALUES ('admin', HashBytes('SHA2_256', 'w23e'), 'Administrador', 0, 1)
+GO
+
+INSERT INTO PUNTO_ZIP.Rol (nombre, activo)
+VALUES ('Administrador', 1)
+GO
+
+INSERT INTO PUNTO_ZIP.Rol (nombre, activo)
+VALUES ('Cobrador', 1)
+GO
+
+INSERT INTO PUNTO_ZIP.Usuario_Rol (id_usuario, id_rol)
+VALUES (1,1)
+GO
+
 ALTER DATABASE [GD2C2017] SET  READ_WRITE 
 GO
 
