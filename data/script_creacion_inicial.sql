@@ -20,6 +20,10 @@ IF OBJECT_ID('PUNTO_ZIP.SP_Create_Rol') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Create_Rol]
 GO
 
+IF OBJECT_ID('PUNTO_ZIP.SP_Create_Cliente') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[SP_Create_Cliente]
+GO
+
 IF OBJECT_ID('PUNTO_ZIP.SP_Create_Empresa') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Create_Empresa]
 GO
@@ -50,6 +54,10 @@ GO
 
 IF OBJECT_ID('PUNTO_ZIP.PR_Get_Roles') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[PR_Get_Roles]
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.PR_Get_Clientes') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[PR_Get_Clientes]
 GO
 
 IF OBJECT_ID('PUNTO_ZIP.PR_Get_Sucursales') IS NOT NULL
@@ -287,6 +295,21 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+CREATE PROCEDURE [PUNTO_ZIP].[PR_Get_Clientes]
+AS
+  BEGIN TRY
+	SELECT C.id, C.nombre, C.apellido, C.dni, C.mail, C.direccion, C.codigo_postal, C.fecha_nacimiento, C.activo FROM [PUNTO_ZIP].CLIENTE C
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE PROCEDURE [PUNTO_ZIP].[PR_Get_Sucursales]
 AS
   BEGIN TRY
@@ -427,6 +450,30 @@ CREATE PROCEDURE [PUNTO_ZIP].[SP_Create_Rol]
 AS
   BEGIN TRY
     INSERT INTO [PUNTO_ZIP].ROL (activo, nombre) VALUES(@activo, @nombre_rol);
+
+	SELECT SCOPE_IDENTITY();
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Create_Cliente]
+  @nombre NVARCHAR(255),
+  @apellido NVARCHAR(255),
+  @dni NVARCHAR(255),
+  @mail NVARCHAR(255),
+  @direccion NVARCHAR(255),
+  @codigo_postal NVARCHAR(255),
+  @fecha_nacimiento DATE
+AS
+  BEGIN TRY
+    INSERT INTO [PUNTO_ZIP].CLIENTE (nombre, apellido, dni, mail, direccion, codigo_postal, fecha_nacimiento, activo)
+	VALUES(@nombre,@apellido,@dni,@mail,@direccion,@codigo_postal,@fecha_nacimiento,1);
 
 	SELECT SCOPE_IDENTITY();
   END TRY
