@@ -50,6 +50,12 @@
     <Compile Include="AbmCliente\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmEmpresa\CrearEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmEmpresa\CrearEmpresa.Designer.cs">
+      <DependentUpon>CrearEmpresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmEmpresa\EmpresaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,12 @@
     </Compile>
     <EmbeddedResource Include="AbmCliente\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmEmpresa\CrearEmpresa.resx">
+      <DependentUpon>CrearEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmEmpresa\EmpresaForm.resx">
+      <DependentUpon>EmpresaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmSucursal\CrearSucursal.resx">
       <DependentUpon>CrearSucursal.cs</DependentUpon>

@@ -69,14 +69,14 @@
             this.dgvSucursales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSucursales.Location = new System.Drawing.Point(30, 59);
             this.dgvSucursales.Name = "dgvSucursales";
-            this.dgvSucursales.Size = new System.Drawing.Size(240, 150);
+            this.dgvSucursales.Size = new System.Drawing.Size(543, 150);
             this.dgvSucursales.TabIndex = 6;
             // 
             // SucursalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(309, 386);
+            this.ClientSize = new System.Drawing.Size(646, 386);
             this.Controls.Add(this.dgvSucursales);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnCrearSucursal);

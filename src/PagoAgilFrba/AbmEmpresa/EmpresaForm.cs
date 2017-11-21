@@ -16,46 +16,30 @@ namespace PagoAgilFrba.AbmEmpresa
         public EmpresaForm()
         {
             InitializeComponent();
-        }
-
-        private void FiltroEmpresa_Load(object sender, EventArgs e)
-        {
-            CargarEmpresas();
-        }
-
-        private void CargarEmpresas()
-        {
-            this.dataGridView_Empresa.DataSource = GetEmpresas();
-         
-            /*//Modificacion
-            if (dataGridView_Empresa.Columns.Contains("Modificar"))
-                dataGridView_Empresa.Columns.Remove("Modificar");
-            DataGridViewButtonColumn botonColumnaModificar = new DataGridViewButtonColumn();
-            botonColumnaModificar.Text = "Modificar";
-            botonColumnaModificar.Name = "Modificar";
-            botonColumnaModificar.UseColumnTextForButtonValue = true;
-            dataGridView_Empresa.Columns.Add(botonColumnaModificar);
-
-            //Eliminar
-            if (dataGridView_Empresa.Columns.Contains("Eliminar"))
-                dataGridView_Empresa.Columns.Remove("Eliminar");
-            DataGridViewButtonColumn botonColumnaEliminar = new DataGridViewButtonColumn();
-            botonColumnaEliminar.Text = "Eliminar";
-            botonColumnaEliminar.Name = "Eliminar";
-            botonColumnaEliminar.UseColumnTextForButtonValue = true;
-            dataGridView_Empresa.Columns.Add(botonColumnaEliminar);*/
+            this.dgvEmpresas.DataSource = GetEmpresas();
         }
 
         private static DataTable GetEmpresas()
         {
             SqlServer sql = new SqlServer();
-            DataTable tabla = sql.EjecutarSp("[PR_Get_Empresas]");
+            DataTable tabla = sql.EjecutarSp("PR_Get_Empresas");
             if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
             {
                 MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
                 return null;
             }
             return tabla;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            CrearEmpresa crearEmpresa = new CrearEmpresa();
+            crearEmpresa.Show();
         }
 
     }
