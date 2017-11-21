@@ -28,65 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblSucursal = new System.Windows.Forms.Label();
-            this.btnEditarSucursal = new System.Windows.Forms.Button();
-            this.btnAgregarSucursal = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCrearSucursal = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.dgvSucursales = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).BeginInit();
             this.SuspendLayout();
             // 
-            // lblSucursal
+            // label1
             // 
-            this.lblSucursal.AutoSize = true;
-            this.lblSucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSucursal.Location = new System.Drawing.Point(99, 22);
-            this.lblSucursal.Name = "lblSucursal";
-            this.lblSucursal.Size = new System.Drawing.Size(110, 25);
-            this.lblSucursal.TabIndex = 7;
-            this.lblSucursal.Text = "Sucursales";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(37, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Sucursales";
             // 
-            // btnEditarSucursal
+            // btnCrearSucursal
             // 
-            this.btnEditarSucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditarSucursal.Location = new System.Drawing.Point(83, 148);
-            this.btnEditarSucursal.Name = "btnEditarSucursal";
-            this.btnEditarSucursal.Size = new System.Drawing.Size(135, 54);
-            this.btnEditarSucursal.TabIndex = 1;
-            this.btnEditarSucursal.Text = "Modificar o Eliminar Sucursal";
-            this.btnEditarSucursal.UseVisualStyleBackColor = true;
-            this.btnEditarSucursal.Click += new System.EventHandler(this.btnEditarSucursal_Click);
-            // 
-            // btnAgregarSucursal
-            // 
-            this.btnAgregarSucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarSucursal.Location = new System.Drawing.Point(83, 65);
-            this.btnAgregarSucursal.Name = "btnAgregarSucursal";
-            this.btnAgregarSucursal.Size = new System.Drawing.Size(135, 54);
-            this.btnAgregarSucursal.TabIndex = 0;
-            this.btnAgregarSucursal.Text = "Agregar Sucursal";
-            this.btnAgregarSucursal.UseVisualStyleBackColor = true;
-            this.btnAgregarSucursal.Click += new System.EventHandler(this.btnAgregarSucursal_Click);
+            this.btnCrearSucursal.Location = new System.Drawing.Point(173, 12);
+            this.btnCrearSucursal.Name = "btnCrearSucursal";
+            this.btnCrearSucursal.Size = new System.Drawing.Size(75, 23);
+            this.btnCrearSucursal.TabIndex = 4;
+            this.btnCrearSucursal.Text = "Crear";
+            this.btnCrearSucursal.UseVisualStyleBackColor = true;
+            this.btnCrearSucursal.Click += new System.EventHandler(this.btnCrearSucursal_Click);
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(15, 321);
+            this.btnVolver.Location = new System.Drawing.Point(40, 314);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(144, 35);
-            this.btnVolver.TabIndex = 2;
-            this.btnVolver.Text = "< Volver al Menú Principal";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 5;
+            this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // dgvSucursales
+            // 
+            this.dgvSucursales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSucursales.Location = new System.Drawing.Point(30, 59);
+            this.dgvSucursales.Name = "dgvSucursales";
+            this.dgvSucursales.Size = new System.Drawing.Size(240, 150);
+            this.dgvSucursales.TabIndex = 6;
             // 
             // SucursalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(309, 386);
+            this.Controls.Add(this.dgvSucursales);
             this.Controls.Add(this.btnVolver);
-            this.Controls.Add(this.lblSucursal);
-            this.Controls.Add(this.btnEditarSucursal);
-            this.Controls.Add(this.btnAgregarSucursal);
+            this.Controls.Add(this.btnCrearSucursal);
+            this.Controls.Add(this.label1);
             this.Name = "SucursalForm";
-            this.Text = "ClienteForm";
+            this.Text = "SucursalForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,9 +91,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblSucursal;
-        private System.Windows.Forms.Button btnEditarSucursal;
-        private System.Windows.Forms.Button btnAgregarSucursal;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnCrearSucursal;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.DataGridView dgvSucursales;
     }
 }

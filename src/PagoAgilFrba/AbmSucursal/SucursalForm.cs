@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagoAgilFrba.Conexiones;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,22 +16,30 @@ namespace PagoAgilFrba.AbmSucursal
         public SucursalForm()
         {
             InitializeComponent();
+            this.dgvSucursales.DataSource = GetSucursales();
         }
 
-        private void btnAgregarSucursal_Click(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnCrearSucursal_Click(object sender, EventArgs e)
         {
             CrearSucursal crearSucursal = new CrearSucursal();
             crearSucursal.Show();
         }
 
-        private void btnEditarSucursal_Click(object sender, EventArgs e)
+        public static DataTable GetSucursales()
         {
-
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-
+            SqlServer sql = new SqlServer();
+            DataTable tabla = sql.EjecutarSp("PR_Get_Sucursales");
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+                return null;
+            }
+            return tabla;
         }
     }
 }
