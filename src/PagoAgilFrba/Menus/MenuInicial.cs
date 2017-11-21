@@ -1,6 +1,7 @@
 ﻿using PagoAgilFrba.Abm_Cliente;
 using PagoAgilFrba.AbmEmpresa;
 using PagoAgilFrba.AbmRol;
+using PagoAgilFrba.AbmSucursal;
 using PagoAgilFrba.Conexiones;
 using System;
 using System.Collections.Generic;
@@ -71,9 +72,14 @@ namespace PagoAgilFrba.Menus
 
         private void Btn_Empresa_Click(object sender, EventArgs e)
         {
-
             EmpresaForm empresa = new EmpresaForm();
             empresa.ShowDialog();
+        }
+
+        private void Btn_Sucursal_Click(object sender, EventArgs e)
+        {
+            SucursalForm sucursal = new SucursalForm();
+            sucursal.ShowDialog();
         }
 
       

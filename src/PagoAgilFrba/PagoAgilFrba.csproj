@@ -68,11 +68,17 @@
     <Compile Include="AbmRol\CrearRol.Designer.cs">
       <DependentUpon>CrearRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmSucursal\Form1.cs">
+    <Compile Include="AbmSucursal\CrearSucursal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmSucursal\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmSucursal\CrearSucursal.Designer.cs">
+      <DependentUpon>CrearSucursal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmSucursal\SucursalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmSucursal\SucursalForm.Designer.cs">
+      <DependentUpon>SucursalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Conexiones\SqlServer.cs" />
     <Compile Include="Form1.cs">
@@ -122,6 +128,12 @@
     </Compile>
     <EmbeddedResource Include="AbmCliente\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmSucursal\CrearSucursal.resx">
+      <DependentUpon>CrearSucursal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmSucursal\SucursalForm.resx">
+      <DependentUpon>SucursalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menus\MenuInicial.resx">
       <DependentUpon>MenuInicial.cs</DependentUpon>

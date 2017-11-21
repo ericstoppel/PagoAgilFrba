@@ -31,6 +31,7 @@
             this.Btn_Rol = new System.Windows.Forms.Button();
             this.Btn_ABM_Cliente = new System.Windows.Forms.Button();
             this.Btn_Empresa = new System.Windows.Forms.Button();
+            this.Btn_Sucursal = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Btn_Rol
@@ -66,6 +67,17 @@
             this.Btn_Empresa.UseVisualStyleBackColor = true;
             this.Btn_Empresa.Click += new System.EventHandler(this.Btn_Empresa_Click);
             // 
+            // Btn_Sucursal
+            // 
+            this.Btn_Sucursal.Location = new System.Drawing.Point(187, 160);
+            this.Btn_Sucursal.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_Sucursal.Name = "Btn_Sucursal";
+            this.Btn_Sucursal.Size = new System.Drawing.Size(127, 42);
+            this.Btn_Sucursal.TabIndex = 12;
+            this.Btn_Sucursal.Text = "ABM Sucursal";
+            this.Btn_Sucursal.UseVisualStyleBackColor = true;
+            this.Btn_Sucursal.Click += new System.EventHandler(this.Btn_Sucursal_Click);
+            // 
             // MenuInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -75,6 +87,7 @@
             this.Controls.Add(this.Btn_Empresa);
             this.Controls.Add(this.Btn_Rol);
             this.Controls.Add(this.Btn_ABM_Cliente);
+            this.Controls.Add(this.Btn_Sucursal);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MenuInicial";
             this.Text = "MenuInicial";
@@ -88,6 +101,7 @@
         private System.Windows.Forms.Button Btn_Rol;
         private System.Windows.Forms.Button Btn_ABM_Cliente;
         private System.Windows.Forms.Button Btn_Empresa;
+        private System.Windows.Forms.Button Btn_Sucursal;
         
     }
 }

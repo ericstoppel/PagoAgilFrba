@@ -20,6 +20,10 @@ IF OBJECT_ID('PUNTO_ZIP.SP_Create_Rol') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Create_Rol]
 GO
 
+IF OBJECT_ID('PUNTO_ZIP.SP_Create_Sucursal') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[SP_Create_Rol]
+GO
+
 IF OBJECT_ID('PUNTO_ZIP.SP_Update_Rol') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Update_Rol]
 GO
@@ -408,6 +412,26 @@ AS
     SELECT 'ERROR', ERROR_MESSAGE()
   END CATCH
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Create_Sucursal]
+  @nombre NVARCHAR(50),
+  @direccion NVARCHAR(50),
+  @codigo_postal NVARCHAR(50)
+AS
+  BEGIN TRY
+    INSERT INTO [PUNTO_ZIP].SUCURSAL (nombre, direccion, codigo_postal, activo) VALUES(@nombre, @direccion, @codigo_postal,1);
+
+	SELECT SCOPE_IDENTITY();
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
 /****** Object:  StoredProcedure [PUNTO_ZIP].[SP_Get_Funcionalidades_Rol]    Script Date: 19/11/2017 10:56:45 p.m. ******/
 SET ANSI_NULLS ON
 GO
