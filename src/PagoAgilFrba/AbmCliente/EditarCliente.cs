@@ -38,15 +38,36 @@ namespace PagoAgilFrba.AbmCliente
                 txtDireccion.Text = tabla.Rows[0].ItemArray[5].ToString();
                 txtCodigoPostal.Text = tabla.Rows[0].ItemArray[6].ToString();
                 dtpFechaNacimiento.Text = tabla.Rows[0].ItemArray[7].ToString();
-
             }
-
-
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            listaParametros.Add("id", this.idCliente.ToString());
+            listaParametros.Add("nombre", this.txtNombre.Text);
+            listaParametros.Add("apellido", this.txtApellido.Text);
+            listaParametros.Add("dni", this.txtDni.Text);
+            listaParametros.Add("mail", this.txtMail.Text);
+            listaParametros.Add("direccion", this.txtDireccion.Text);
+            listaParametros.Add("codigo_postal", this.txtCodigoPostal.Text);
+            listaParametros.Add("fecha_nacimiento", this.dtpFechaNacimiento.Value.ToString());
+
+            DataTable tabla = sql.EjecutarSp("SP_Update_Cliente", listaParametros);
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+            }
+            else {
+                MessageBox.Show("Cliente editado exitosamente.");
+                this.Close();
+            }
         }
     }
 }

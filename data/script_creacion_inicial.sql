@@ -41,6 +41,10 @@ IF OBJECT_ID('PUNTO_ZIP.SP_Update_Rol') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Update_Rol]
 GO
 
+IF OBJECT_ID('PUNTO_ZIP.SP_Update_Cliente') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.[SP_Update_Cliente]
+GO
+
 IF OBJECT_ID('PUNTO_ZIP.SP_Update_Funcionalidad_Por_Rol') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Update_Funcionalidad_Por_Rol]
 GO
@@ -636,6 +640,31 @@ AS
     SELECT 'ERROR', ERROR_MESSAGE()
   END CATCH
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Update_Cliente]
+  @id NVARCHAR(50),
+  @nombre NVARCHAR(255),
+  @apellido NVARCHAR(255),
+  @dni NVARCHAR(255),
+  @mail NVARCHAR(255),
+  @direccion NVARCHAR(255),
+  @codigo_postal NVARCHAR(255),
+  @fecha_nacimiento DATE
+AS
+  BEGIN TRY
+	 UPDATE [PUNTO_ZIP].CLIENTE 
+	 SET nombre=@nombre, apellido=@apellido, dni=@dni, mail=@mail, direccion=@direccion, codigo_postal=@codigo_postal, fecha_nacimiento=@fecha_nacimiento
+	 WHERE id = @id
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
 
 SET ANSI_NULLS ON
 GO
