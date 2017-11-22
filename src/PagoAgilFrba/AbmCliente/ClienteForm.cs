@@ -19,6 +19,8 @@ namespace PagoAgilFrba.Abm_Cliente
         {
             InitializeComponent();
             this.dgvClientes.DataSource = GetClientes();
+            AgregarEditar();
+            AgregarBorrar();
         }
 
         private static DataTable GetClientes()
@@ -42,6 +44,50 @@ namespace PagoAgilFrba.Abm_Cliente
         {
             CrearCliente crearCliente = new CrearCliente();
             crearCliente.Show();
+        }
+
+        private void AgregarEditar()
+        {
+            if (dgvClientes.Columns.Contains("Editar"))
+                dgvClientes.Columns.Remove("Editar");
+            DataGridViewButtonColumn btnEditar = new DataGridViewButtonColumn();
+            btnEditar.Text = "Editar";
+            btnEditar.Name = "Editar";
+            btnEditar.UseColumnTextForButtonValue = true;
+            dgvClientes.Columns.Add(btnEditar);
+        }
+
+        private void AgregarBorrar()
+        {
+            if (dgvClientes.Columns.Contains("Borrar"))
+                dgvClientes.Columns.Remove("Borrar");
+            DataGridViewButtonColumn btnBorrar = new DataGridViewButtonColumn();
+            btnBorrar.Text = "Borrar";
+            btnBorrar.Name = "Borrar";
+            btnBorrar.UseColumnTextForButtonValue = true;
+            dgvClientes.Columns.Add(btnBorrar);
+        }
+
+        private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dgvClientes.Columns["Editar"].Index && e.RowIndex >= 0)
+            {
+                int idAEditar = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["id"].Value);
+                EditarCliente editarCliente = new EditarCliente(idAEditar);
+                editarCliente.Show();
+                return;
+            }
+           /* if (e.ColumnIndex == dgvClientes.Columns["Borrar"].Index && e.RowIndex >= 0)
+            {
+                String dniABorrar = dataGridView_Cliente.Rows[e.RowIndex].Cells["Dni"].Value.ToString();
+                Decimal idABorrar = comunicador.SelectFromWhere("clie_id", "Cliente", "clie_dni", Convert.ToDecimal(dniClienteAEliminar));
+                Boolean resultado = comunicador.EliminarCliente(idClienteAEliminar);
+                if (resultado) MessageBox.Show("Se elimino correctamente");
+                this.dgvClientes.DataSource = GetClientes();
+                AgregarEditar();
+                AgregarBorrar();
+                return;
+            }*/
         }
     }
 }
