@@ -36,7 +36,7 @@
             // 
             // Btn_Rol
             // 
-            this.Btn_Rol.Location = new System.Drawing.Point(487, 34);
+            this.Btn_Rol.Location = new System.Drawing.Point(440, 162);
             this.Btn_Rol.Margin = new System.Windows.Forms.Padding(2);
             this.Btn_Rol.Name = "Btn_Rol";
             this.Btn_Rol.Size = new System.Drawing.Size(129, 40);

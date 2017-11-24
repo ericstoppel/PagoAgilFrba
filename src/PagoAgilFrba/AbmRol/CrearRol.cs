@@ -1,4 +1,5 @@
 ﻿using PagoAgilFrba.Conexiones;
+using PagoAgilFrba.Utiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +35,6 @@ namespace PagoAgilFrba.AbmRol
         public static DataTable GetFuncionalidades()
         {
             SqlServer sql = new SqlServer();
-
             DataTable tabla = sql.EjecutarSp("PR_Get_Funcionalidades");
             if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
             {
@@ -283,6 +283,16 @@ namespace PagoAgilFrba.AbmRol
         }
 
         private void Cl_Abm_Rol_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

@@ -1,6 +1,11 @@
 ﻿USE [GD2C2017]
 GO
 
+-------------------------------DROP FUNCTIONS ----------------------------
+IF OBJECT_ID('[PUNTO_ZIP].SPLIT') IS NOT NULL
+DROP PROCEDURE [PUNTO_ZIP].SPLIT
+GO
+
 -------------------------------DROP PROCEDURES----------------------------
 
 IF OBJECT_ID('[PUNTO_ZIP].PR_LOGIN') IS NOT NULL
@@ -96,6 +101,7 @@ GO
 IF OBJECT_ID('PUNTO_ZIP.PR_INHABILITAR_ROL') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[PR_INHABILITAR_ROL]
 GO
+
 
 IF OBJECT_ID('PUNTO_ZIP.SP_Get_Funcionalidades_Rol') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Get_Funcionalidades_Rol]
@@ -389,23 +395,7 @@ AS
     SELECT 'ERROR', ERROR_MESSAGE()
   END CATCH
 GO
-/****** Object:  StoredProcedure [PUNTO_ZIP].[PR_INHABILITAR_ROL]    Script Date: 19/11/2017 10:56:45 p.m. ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [PUNTO_ZIP].[PR_INHABILITAR_ROL] @ID_ROL INT
-AS
-DECLARE @NOMBRE_ROL NVARCHAR(50)
-BEGIN TRY
-	UPDATE [PUNTO_ZIP].ROL SET activo = 0 WHERE id = @ID_ROL
 
-	DELETE FROM [PUNTO_ZIP].Usuario_Rol WHERE id_rol = @ID_ROL
-END TRY
-BEGIN CATCH
-  SELECT 'ERROR', ERROR_MESSAGE()
-END CATCH
-GO
 /****** Object:  StoredProcedure [PUNTO_ZIP].[PR_INSERTAR_MODIFICAR_CLIENTE]    Script Date: 19/11/2017 10:56:45 p.m. ******/
 SET ANSI_NULLS ON
 GO
@@ -699,39 +689,6 @@ AS
     INNER JOIN [PUNTO_ZIP].ROL R
         ON RU.id_rol = R.id
     WHERE RU.id_usuario = @id_usuario
-  END TRY
-  BEGIN CATCH
-    SELECT 'ERROR', ERROR_MESSAGE()
-  END CATCH
-GO
-/****** Object:  StoredProcedure [PUNTO_ZIP].[SP_Update_Funcionalidad_Por_Rol]    Script Date: 19/11/2017 10:56:45 p.m. ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [PUNTO_ZIP].[SP_Update_Funcionalidad_Por_Rol]
-  @ID_Rol int,
-  @funcionalidad_nombre VARCHAR(50),
-  @activo bit
-AS
-  BEGIN TRY
-    DECLARE @ID_Funcionalidad NUMERIC(18)
-    DECLARE @ID_Rol_Aux NUMERIC(18)
-    DECLARE @ID_Funcionalidad_Aux NUMERIC(18)
-
-    SELECT @ID_Funcionalidad = id FROM [PUNTO_ZIP].FUNCIONALIDAD WHERE nombre = @funcionalidad_nombre
-
-    SELECT @ID_Rol_Aux = id_rol, @ID_Funcionalidad_Aux = id_funcionalidad FROM [PUNTO_ZIP].Rol_Funcionalidad 
-	WHERE id_rol = @ID_Rol AND id_funcionalidad = @ID_Funcionalidad
-
-    IF @ID_Rol_Aux IS NOT NULL AND @ID_Funcionalidad_Aux IS NOT NULL
-	BEGIN
-	  IF(@activo = 0)
-		 DELETE FROM [PUNTO_ZIP].Rol_Funcionalidad
-		 WHERE id_funcionalidad = @ID_Funcionalidad_Aux AND id_rol = @ID_Rol_Aux
-    END
-	ELSE IF @activo = 1
-      INSERT INTO [PUNTO_ZIP].Rol_Funcionalidad(id_funcionalidad, id_rol) VALUES (@ID_Funcionalidad, @ID_Rol)
   END TRY
   BEGIN CATCH
     SELECT 'ERROR', ERROR_MESSAGE()
@@ -1487,9 +1444,6 @@ GO
 
 EXEC PUNTO_ZIP.SP_Migrar_Datos;
 
-USE [master]
-GO
-
 INSERT INTO PUNTO_ZIP.Usuario (username, password, nombre, intentos_login, activo)
 VALUES ('admin', HashBytes('SHA2_256', 'w23e'), 'Administrador', 0, 1)
 GO
@@ -1504,6 +1458,51 @@ GO
 
 INSERT INTO PUNTO_ZIP.Usuario_Rol (id_usuario, id_rol)
 VALUES (1,1)
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION [PUNTO_ZIP].[Split]
+(
+    @sString nvarchar(2048),
+    @cDelimiter nchar(1)
+)
+RETURNS @tParts TABLE ( value nvarchar(2048) )
+AS
+BEGIN
+    if @sString is null return
+    declare @iStart int,
+            @iPos int
+    if substring( @sString, 1, 1 ) = @cDelimiter 
+    begin
+        set @iStart = 2
+        insert into @tParts
+        values( null )
+    end
+    else 
+        set @iStart = 1
+    while 1=1
+    begin
+        set @iPos = charindex( @cDelimiter, @sString, @iStart )
+        if @iPos = 0
+            set @iPos = len( @sString )+1
+        if @iPos - @iStart > 0          
+            insert into @tParts
+            values  ( substring( @sString, @iStart, @iPos-@iStart ))
+        else
+            insert into @tParts
+            values( null )
+        set @iStart = @iPos+1
+        if @iStart > len( @sString ) 
+            break
+    end
+    RETURN
+
+END
+
+USE [master]
 GO
 
 ALTER DATABASE [GD2C2017] SET  READ_WRITE 

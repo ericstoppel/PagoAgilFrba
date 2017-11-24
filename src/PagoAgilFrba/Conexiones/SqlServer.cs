@@ -13,27 +13,17 @@ namespace PagoAgilFrba.Conexiones
     {
         public SqlConnection CrearSqlConnection()
         {
-            return new SqlConnection(this.CadenaDeConexion());
+            return new SqlConnection(this.ParametrosConexion());
         }
 
-        private string CadenaDeConexion()
+        private string ParametrosConexion()
         {
-            //            string sqlCadenaConexion = Settings.Default.SQL_Database +
-            //                                       Settings.Default.SQL_Server + @"\" +
-            //                                       Settings.Default.SQL_Name +
-            //                                       Settings.Default.SQL_Password +
-            //                                       Settings.Default.SQL_Security +
-            //                                       Settings.Default.SQL_Timeout +
-            //                                       Settings.Default.SQL_User;
-            string sqlCadenaConexion =
-                "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2017;Persist Security Info=True;User ID=gd;Password=gd2017;";
-
-            return sqlCadenaConexion;
+            return "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2017;Persist Security Info=True;User ID=gd;Password=gd2017;";
         }
 
         public SqlConnection AbrirConnection()
         {
-            SqlConnection sqlConexion = new SqlConnection(this.CadenaDeConexion());
+            SqlConnection sqlConexion = new SqlConnection(this.ParametrosConexion());
             try
             {
                 sqlConexion.Open();

@@ -60,7 +60,7 @@ namespace PagoAgilFrba.Menus
 
         private void Btn_Rol_Click(object sender, EventArgs e)
         {
-            Cl_Abm_Rol rol = new Cl_Abm_Rol();
+            ListadoRoles rol = new ListadoRoles();
             rol.ShowDialog();
         }
 

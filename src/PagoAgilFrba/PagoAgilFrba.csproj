@@ -92,6 +92,18 @@
     <Compile Include="AbmRol\CrearRol.Designer.cs">
       <DependentUpon>CrearRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRol\ListadoRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\ListadoRoles.Designer.cs">
+      <DependentUpon>ListadoRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\PantallaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\PantallaRol.Designer.cs">
+      <DependentUpon>PantallaRol.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmSucursal\CrearSucursal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +177,7 @@
     <EmbeddedResource Include="AbmCliente\EditarCliente.resx">
       <DependentUpon>EditarCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="Utiles\Utiles.cs" />
     <EmbeddedResource Include="AbmEmpresa\CrearEmpresa.resx">
       <DependentUpon>CrearEmpresa.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +187,15 @@
     <EmbeddedResource Include="AbmEmpresa\EmpresaForm.resx">
       <DependentUpon>EmpresaForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\CrearRol.resx">
+      <DependentUpon>CrearRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\ListadoRoles.resx">
+      <DependentUpon>ListadoRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\PantallaRol.resx">
+      <DependentUpon>PantallaRol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmSucursal\CrearSucursal.resx">
       <DependentUpon>CrearSucursal.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmSucursal\SucursalForm.resx">
       <DependentUpon>SucursalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menus\MenuInicial.resx">
       <DependentUpon>MenuInicial.cs</DependentUpon>

@@ -32,12 +32,14 @@
             this.Btn_Cancelar = new System.Windows.Forms.Button();
             this.Btn_Crear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.chkHabilitado = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Clb_Funcionalidades = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Txt_NombreRol = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Roles)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +59,7 @@
             this.DGV_Roles.MultiSelect = false;
             this.DGV_Roles.Name = "DGV_Roles";
             this.DGV_Roles.ReadOnly = true;
-            this.DGV_Roles.Size = new System.Drawing.Size(321, 341);
+            this.DGV_Roles.Size = new System.Drawing.Size(581, 115);
             this.DGV_Roles.TabIndex = 0;
             this.DGV_Roles.UseWaitCursor = true;
             this.DGV_Roles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Roles_CellContentClick);
@@ -85,6 +87,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnEliminar);
+            this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.chkHabilitado);
             this.groupBox1.Controls.Add(this.Btn_Crear);
             this.groupBox1.Controls.Add(this.Btn_Cancelar);
@@ -93,18 +97,28 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.Txt_NombreRol);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(340, 13);
+            this.groupBox1.Location = new System.Drawing.Point(13, 147);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(254, 341);
+            this.groupBox1.Size = new System.Drawing.Size(618, 220);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Complete los campos";
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(38, 136);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 6;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.button1_Click);
+            // 
             // chkHabilitado
             // 
             this.chkHabilitado.AutoSize = true;
-            this.chkHabilitado.Location = new System.Drawing.Point(96, 267);
-            this.chkHabilitado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkHabilitado.Location = new System.Drawing.Point(92, 84);
+            this.chkHabilitado.Margin = new System.Windows.Forms.Padding(2);
             this.chkHabilitado.Name = "chkHabilitado";
             this.chkHabilitado.Size = new System.Drawing.Size(15, 14);
             this.chkHabilitado.TabIndex = 5;
@@ -113,25 +127,26 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 266);
+            this.label3.Location = new System.Drawing.Point(33, 85);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Habilitado";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // Clb_Funcionalidades
             // 
             this.Clb_Funcionalidades.FormattingEnabled = true;
-            this.Clb_Funcionalidades.Location = new System.Drawing.Point(40, 80);
+            this.Clb_Funcionalidades.Location = new System.Drawing.Point(290, 32);
             this.Clb_Funcionalidades.Name = "Clb_Funcionalidades";
-            this.Clb_Funcionalidades.Size = new System.Drawing.Size(209, 184);
+            this.Clb_Funcionalidades.Size = new System.Drawing.Size(281, 154);
             this.Clb_Funcionalidades.TabIndex = 3;
             this.Clb_Funcionalidades.SelectedIndexChanged += new System.EventHandler(this.Clb_Funcionalidades_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 58);
+            this.label2.Location = new System.Drawing.Point(296, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 2;
@@ -140,7 +155,7 @@
             // 
             // Txt_NombreRol
             // 
-            this.Txt_NombreRol.Location = new System.Drawing.Point(36, 37);
+            this.Txt_NombreRol.Location = new System.Drawing.Point(36, 47);
             this.Txt_NombreRol.Name = "Txt_NombreRol";
             this.Txt_NombreRol.Size = new System.Drawing.Size(212, 20);
             this.Txt_NombreRol.TabIndex = 1;
@@ -154,12 +169,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre del Rol";
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(134, 136);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 7;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            // 
             // Cl_Abm_Rol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(606, 366);
+            this.ClientSize = new System.Drawing.Size(636, 642);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DGV_Roles);
             this.Name = "Cl_Abm_Rol";
@@ -184,5 +208,7 @@
         private System.Windows.Forms.TextBox Txt_NombreRol;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkHabilitado;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }
