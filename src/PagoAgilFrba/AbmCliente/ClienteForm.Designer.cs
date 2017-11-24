@@ -32,6 +32,7 @@
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnCrear = new System.Windows.Forms.Button();
+            this.btnActualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Location = new System.Drawing.Point(25, 78);
             this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.Size = new System.Drawing.Size(823, 288);
+            this.dgvClientes.Size = new System.Drawing.Size(1160, 288);
             this.dgvClientes.TabIndex = 1;
             this.dgvClientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellClick);
             // 
@@ -73,6 +74,16 @@
             this.btnCrear.UseVisualStyleBackColor = true;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(268, 384);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.TabIndex = 4;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
             // Cl_Abm_Cliente
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -80,13 +91,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(898, 419);
+            this.ClientSize = new System.Drawing.Size(1197, 419);
+            this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.dgvClientes);
             this.Controls.Add(this.label1);
             this.Name = "Cl_Abm_Cliente";
             this.Text = "ClienteForm";
+            this.Load += new System.EventHandler(this.Cl_Abm_Cliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -99,6 +112,7 @@
         private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnCrear;
+        private System.Windows.Forms.Button btnActualizar;
 
 
     }

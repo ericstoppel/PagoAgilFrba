@@ -20,6 +20,9 @@ IF OBJECT_ID('PUNTO_ZIP.SP_Get_Cliente_By_Id') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.SP_Get_Cliente_By_Id
 GO
 
+IF OBJECT_ID('PUNTO_ZIP.SP_Baja_Cliente_By_Id') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.SP_Baja_Cliente_By_Id
+GO
 
 IF OBJECT_ID('PUNTO_ZIP.SP_Create_Rol') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Create_Rol]
@@ -43,6 +46,10 @@ GO
 
 IF OBJECT_ID('PUNTO_ZIP.SP_Update_Cliente') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Update_Cliente]
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.SP_Validar_Mail_Cliente') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.SP_Validar_Mail_Cliente
 GO
 
 IF OBJECT_ID('PUNTO_ZIP.SP_Update_Funcionalidad_Por_Rol') IS NOT NULL
@@ -653,11 +660,12 @@ CREATE PROCEDURE [PUNTO_ZIP].[SP_Update_Cliente]
   @mail NVARCHAR(255),
   @direccion NVARCHAR(255),
   @codigo_postal NVARCHAR(255),
-  @fecha_nacimiento DATE
+  @fecha_nacimiento DATE,
+  @activo TINYINT
 AS
   BEGIN TRY
 	 UPDATE [PUNTO_ZIP].CLIENTE 
-	 SET nombre=@nombre, apellido=@apellido, dni=@dni, mail=@mail, direccion=@direccion, codigo_postal=@codigo_postal, fecha_nacimiento=@fecha_nacimiento
+	 SET nombre=@nombre, apellido=@apellido, dni=@dni, mail=@mail, direccion=@direccion, codigo_postal=@codigo_postal, fecha_nacimiento=@fecha_nacimiento, activo=@activo
 	 WHERE id = @id
   END TRY
   BEGIN CATCH
@@ -665,6 +673,41 @@ AS
   END CATCH
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].SP_Validar_Mail_Cliente
+  @mail NVARCHAR(255)
+AS
+  BEGIN TRY
+	 IF EXISTS(SELECT * FROM PUNTO_ZIP.CLIENTE
+	 WHERE mail = @mail)
+	BEGIN
+	 SELECT 'true'
+	END
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [PUNTO_ZIP].SP_Baja_Cliente_By_Id
+  @id NVARCHAR(50)
+AS
+  BEGIN TRY
+	 UPDATE [PUNTO_ZIP].CLIENTE 
+	 SET activo=0
+	 WHERE id = @id
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
 
 SET ANSI_NULLS ON
 GO

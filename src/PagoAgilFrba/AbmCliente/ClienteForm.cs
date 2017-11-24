@@ -17,10 +17,7 @@ namespace PagoAgilFrba.Abm_Cliente
     {
         public Cl_Abm_Cliente()
         {
-            InitializeComponent();
-            this.dgvClientes.DataSource = GetClientes();
-            AgregarEditar();
-            AgregarBorrar();
+            InitializeComponent();            
         }
 
         private static DataTable GetClientes()
@@ -77,17 +74,35 @@ namespace PagoAgilFrba.Abm_Cliente
                 editarCliente.Show();
                 return;
             }
-           /* if (e.ColumnIndex == dgvClientes.Columns["Borrar"].Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == dgvClientes.Columns["Borrar"].Index && e.RowIndex >= 0)
             {
-                String dniABorrar = dataGridView_Cliente.Rows[e.RowIndex].Cells["Dni"].Value.ToString();
-                Decimal idABorrar = comunicador.SelectFromWhere("clie_id", "Cliente", "clie_dni", Convert.ToDecimal(dniClienteAEliminar));
-                Boolean resultado = comunicador.EliminarCliente(idClienteAEliminar);
-                if (resultado) MessageBox.Show("Se elimino correctamente");
-                this.dgvClientes.DataSource = GetClientes();
-                AgregarEditar();
-                AgregarBorrar();
+                SqlServer sql = new SqlServer();
+                var listaParametros = new Dictionary<string, string>();
+                listaParametros.Add("id", dgvClientes.Rows[e.RowIndex].Cells["id"].Value.ToString());
+                DataTable tabla = sql.EjecutarSp("SP_Baja_Cliente_By_Id", listaParametros);
+                if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+                {
+                    MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+                }
+                ActualizarClienteForm();
                 return;
-            }*/
+            }
+        }
+
+        private void Cl_Abm_Cliente_Load(object sender, EventArgs e)
+        {
+            ActualizarClienteForm();
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            ActualizarClienteForm();
+        }
+
+        public void ActualizarClienteForm() {
+            this.dgvClientes.DataSource = GetClientes();
+            AgregarEditar();
+            AgregarBorrar();
         }
     }
 }
