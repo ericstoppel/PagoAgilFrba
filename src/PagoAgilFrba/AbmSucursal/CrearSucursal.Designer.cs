@@ -35,6 +35,7 @@
             this.btnCrear = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtCodigoPostalSucursal = new System.Windows.Forms.TextBox();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -71,7 +72,7 @@
             // 
             // btnCrear
             // 
-            this.btnCrear.Location = new System.Drawing.Point(80, 160);
+            this.btnCrear.Location = new System.Drawing.Point(155, 167);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.TabIndex = 4;
@@ -95,11 +96,22 @@
             this.txtCodigoPostalSucursal.Size = new System.Drawing.Size(100, 20);
             this.txtCodigoPostalSucursal.TabIndex = 6;
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(38, 167);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 7;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // CrearSucursal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtCodigoPostalSucursal);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCrear);
@@ -123,5 +135,6 @@
         private System.Windows.Forms.Button btnCrear;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtCodigoPostalSucursal;
+        private System.Windows.Forms.Button btnVolver;
     }
 }
