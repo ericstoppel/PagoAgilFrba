@@ -24,6 +24,10 @@ IF OBJECT_ID('PUNTO_ZIP.SP_Get_Cliente_By_Id') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.SP_Get_Cliente_By_Id
 GO
 
+IF OBJECT_ID('PUNTO_ZIP.SP_Get_Empresa_By_Id') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.SP_Get_Empresa_By_Id
+GO
+
 IF OBJECT_ID('PUNTO_ZIP.SP_Baja_Cliente_By_Id') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.SP_Baja_Cliente_By_Id
 GO
@@ -54,6 +58,10 @@ GO
 
 IF OBJECT_ID('PUNTO_ZIP.SP_Update_Cliente') IS NOT NULL
 DROP PROCEDURE PUNTO_ZIP.[SP_Update_Cliente]
+GO
+
+IF OBJECT_ID('PUNTO_ZIP.SP_Update_Empresa') IS NOT NULL
+DROP PROCEDURE PUNTO_ZIP.SP_Update_Empresa
 GO
 
 IF OBJECT_ID('PUNTO_ZIP.SP_Validar_Mail_Cliente') IS NOT NULL
@@ -286,8 +294,8 @@ GO
 CREATE PROCEDURE [PUNTO_ZIP].[PR_Get_Empresas]
 AS
   BEGIN TRY
-	SELECT e.nombre Nombre, e.cuit Cuit, e.direccion Direccion, 
-	r.nombre Rubro FROM [PUNTO_ZIP].EMPRESA e
+	SELECT e.id id, e.nombre Nombre, e.cuit Cuit, e.direccion Direccion, 
+	r.nombre Rubro, e.activo activo FROM [PUNTO_ZIP].EMPRESA e
 	 INNER JOIN [PUNTO_ZIP].RUBRO AS r
       ON r.id = e.id_rubro
   END TRY
@@ -525,6 +533,27 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+CREATE PROCEDURE [PUNTO_ZIP].SP_Get_Empresa_By_Id
+  @idEmpresa INT
+AS
+  BEGIN TRY
+   SELECT e.id id, e.nombre Nombre, e.cuit Cuit, e.direccion Direccion, 
+	r.nombre Rubro, e.activo activo FROM [PUNTO_ZIP].EMPRESA e
+	 INNER JOIN [PUNTO_ZIP].RUBRO AS r
+      ON r.id = e.id_rubro
+	  WHERE e.id = @idEmpresa
+
+	SELECT SCOPE_IDENTITY();
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE PROCEDURE [PUNTO_ZIP].SP_Get_Rubro_By_Nombre
   @nombre NVARCHAR(50)
 AS
@@ -724,6 +753,28 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+CREATE PROCEDURE [PUNTO_ZIP].[SP_Update_Empresa]
+  @id NVARCHAR(50),
+  @nombre NVARCHAR(50),
+  @direccion NVARCHAR(50),
+  @cuit NVARCHAR(30),
+  @id_rubro INT,
+  @activo TINYINT
+AS
+  BEGIN TRY
+	 UPDATE [PUNTO_ZIP].Empresa 
+	 SET nombre=@nombre, direccion=@direccion, cuit=@cuit, id_rubro=@id_rubro, activo=@activo
+	 WHERE id = @id
+  END TRY
+  BEGIN CATCH
+    SELECT 'ERROR', ERROR_MESSAGE()
+  END CATCH
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE PROCEDURE [PUNTO_ZIP].SP_Validar_Mail_Cliente
   @mail NVARCHAR(255)
 AS
@@ -786,7 +837,8 @@ AS
 	 UPDATE [PUNTO_ZIP].Empresa 
 	 SET activo=0
 	 WHERE id = @id
-  END TRY
+  END 
+
   BEGIN CATCH
     SELECT 'ERROR', ERROR_MESSAGE()
   END CATCH
