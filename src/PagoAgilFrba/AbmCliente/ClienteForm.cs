@@ -104,5 +104,10 @@ namespace PagoAgilFrba.Abm_Cliente
             AgregarEditar();
             AgregarBorrar();
         }
+
+        private void btnFiltrarClientes_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

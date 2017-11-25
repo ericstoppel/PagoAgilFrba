@@ -61,9 +61,35 @@ namespace PagoAgilFrba.AbmCliente
                 MessageBox.Show("El campo activo tiene que ser un 1 o un 0.");
                 return false;
             }
+            else if (!ValidarMail(Mail)) {
+                MessageBox.Show("El mail ingresado ya esta en uso por otro cliente.");
+                return false;
+            }
             else
             {
                 return true;
+            }
+        }
+
+        private Boolean ValidarMail(String Mail)
+        {
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            listaParametros.Add("mail", Mail);
+            DataTable tabla = sql.EjecutarSp("SP_Validar_Mail_Cliente", listaParametros);
+
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+                return false;
+            }
+            else if (tabla.Rows.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
