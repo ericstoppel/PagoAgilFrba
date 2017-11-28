@@ -106,7 +106,7 @@ namespace PagoAgilFrba.AbmFactura
             string numerosFactura = "";
             for(int i = 0; i < Table_Facturas.SelectedRows.Count; i++) {
                 DataGridViewRow factura = Table_Facturas.Rows[Table_Facturas.SelectedRows[i].Index];
-                numerosFactura += "," + factura.Cells[0].Value.ToString();
+                numerosFactura += "," + factura.Cells[1].Value.ToString();
             }
             return numerosFactura.Substring(1);
         }

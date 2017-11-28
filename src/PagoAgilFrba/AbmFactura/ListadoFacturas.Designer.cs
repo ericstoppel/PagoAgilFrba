@@ -44,7 +44,6 @@
             this.btnPagar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btnRendir = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Table_Facturas)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -205,22 +204,11 @@
             this.btnRendir.UseVisualStyleBackColor = true;
             this.btnRendir.Click += new System.EventHandler(this.btnRendir_Click);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(290, 267);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(290, 16);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Doble click para ver detalle de la factura";
-            // 
             // ListadoFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1373, 490);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnRendir);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnPagar);
@@ -232,7 +220,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -254,6 +241,5 @@
         private System.Windows.Forms.Button btnPagar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnRendir;
-        private System.Windows.Forms.Label label7;
     }
 }

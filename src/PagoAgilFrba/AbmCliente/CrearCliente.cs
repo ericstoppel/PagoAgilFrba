@@ -60,6 +60,7 @@ namespace PagoAgilFrba.AbmCliente
             SqlServer sql = new SqlServer();
             var listaParametros = new Dictionary<string, string>();
             listaParametros.Add("mail", Mail);
+            listaParametros.Add("id_cliente", "1");
             DataTable tabla = sql.EjecutarSp("SP_Validar_Mail_Cliente", listaParametros);
 
             if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
@@ -78,6 +79,9 @@ namespace PagoAgilFrba.AbmCliente
 
         private void CrearNuevoCliente()
         {
+            DateTime fechaNacimiento = this.dtpFechaNacimiento.Value;
+            String fecha = String.Format("{0:yyyy-M-d}", fechaNacimiento);
+
             SqlServer sql = new SqlServer();
             var listaParametros = new Dictionary<string, string>();
 
@@ -87,7 +91,7 @@ namespace PagoAgilFrba.AbmCliente
             listaParametros.Add("mail", this.txtMail.Text);
             listaParametros.Add("direccion", this.txtDireccion.Text);
             listaParametros.Add("codigo_postal", this.txtCodigoPostal.Text);
-            listaParametros.Add("fecha_nacimiento", this.dtpFechaNacimiento.Value.ToString());
+            listaParametros.Add("fecha_nacimiento", fecha);
          
 
             DataTable tabla = sql.EjecutarSp("SP_Create_Cliente", listaParametros);

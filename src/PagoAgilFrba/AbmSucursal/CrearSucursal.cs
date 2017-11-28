@@ -27,7 +27,7 @@ namespace PagoAgilFrba.AbmSucursal
 
         private Boolean ValidarSucursalForm()
         {
-            String Nombre = this.txtNombreSucursal.Text;
+            /*String Nombre = this.txtNombreSucursal.Text;
             String Direccion = this.txtDireccionSucursal.Text;
             String CodigoPostal = this.txtCodigoPostalSucursal.Text;
 
@@ -44,7 +44,8 @@ namespace PagoAgilFrba.AbmSucursal
             else
             {
                 return true;
-            }
+            }*/
+            return true;
         }
 
         private Boolean ValidarCodigoPostal(String CodigoPostal)

@@ -58,6 +58,7 @@ namespace PagoAgilFrba.AbmEmpresa
             SqlServer sql = new SqlServer();
             var listaParametros = new Dictionary<string, string>();
             listaParametros.Add("cuit", Cuit);
+            listaParametros.Add("id_empresa", "-1");
             DataTable tabla = sql.EjecutarSp("SP_Validar_Cuit_Empresa", listaParametros);
 
             if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")

@@ -83,8 +83,8 @@ namespace PagoAgilFrba.Abm_Cliente
 
         public void ActualizarClienteForm() {
             this.dgvClientes.DataSource = GetClientes();
-            AgregarEditar();
-            AgregarBorrar();
+            /*AgregarEditar();
+            AgregarBorrar();*/
         }
 
         private void btnFiltrarClientes_Click(object sender, EventArgs e)
