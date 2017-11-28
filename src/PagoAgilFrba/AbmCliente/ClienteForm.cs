@@ -89,7 +89,106 @@ namespace PagoAgilFrba.Abm_Cliente
 
         private void btnFiltrarClientes_Click(object sender, EventArgs e)
         {
+            String filtroNombre = this.txtFiltroNombre.Text;
+            String filtroApellido = this.txtFiltroApellido.Text;
+            String filtroDni = this.txtFiltroDni.Text;
 
+            if (filtroNombre != "" && filtroApellido != "" && filtroDni != "") {
+                this.dgvClientes.DataSource = GetClientesFiltradosNAD(filtroNombre, filtroApellido, filtroDni);
+            }else if (filtroNombre != "" && filtroApellido != "" && filtroDni == "") {
+                this.dgvClientes.DataSource = GetClientesFiltradosNA(filtroNombre, filtroApellido);
+            }else if (filtroNombre != "" && filtroApellido == "" && filtroDni == "") {
+                this.dgvClientes.DataSource = GetClientesFiltradosN(filtroNombre);
+            }else if (filtroNombre != "" && filtroApellido == "" && filtroDni != "") {
+                this.dgvClientes.DataSource = GetClientesFiltradosND(filtroNombre, filtroDni);
+            }else if (filtroNombre != "" && filtroApellido == "" && filtroDni != "") {
+                this.dgvClientes.DataSource = GetClientesFiltradosAD(filtroApellido, filtroDni);
+            }else if (filtroNombre == "" && filtroApellido == "" && filtroDni == ""){
+                this.dgvClientes.DataSource = GetClientes();
+            }
         }
+
+        private static DataTable GetClientesFiltradosNAD(String filtroNombre, String filtroApellido, String filtroDNI)
+        {
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            listaParametros.Add("nombre", filtroNombre);
+            listaParametros.Add("apellido", filtroApellido);
+            listaParametros.Add("dni", filtroDNI);
+
+            DataTable tabla = sql.EjecutarSp("PR_Get_Clientes_NAD");
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+                return null;
+            }
+            return tabla;
+        }
+
+        private static DataTable GetClientesFiltradosNA(String filtroNombre, String filtroApellido)
+        {
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            listaParametros.Add("nombre", filtroNombre);
+            listaParametros.Add("apellido", filtroApellido);
+
+            DataTable tabla = sql.EjecutarSp("PR_Get_Clientes_NA");
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+                return null;
+            }
+            return tabla;
+        }
+
+        private static DataTable GetClientesFiltradosN(String filtroNombre)
+        {
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            listaParametros.Add("nombre", filtroNombre);
+
+            DataTable tabla = sql.EjecutarSp("PR_Get_Clientes_N");
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+                return null;
+            }
+            return tabla;
+        }
+
+        private static DataTable GetClientesFiltradosND(String filtroNombre, String filtroDni)
+        {
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            listaParametros.Add("nombre", filtroNombre);
+            listaParametros.Add("dni", filtroDni);
+
+            DataTable tabla = sql.EjecutarSp("PR_Get_Clientes_ND");
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+                return null;
+            }
+            return tabla;
+        }
+
+        private static DataTable GetClientesFiltradosAD(String filtroApellido, String filtroDni)
+        {
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            listaParametros.Add("apellido", filtroApellido);
+            listaParametros.Add("dni", filtroDni);
+
+            DataTable tabla = sql.EjecutarSp("PR_Get_Clientes_AD");
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+                return null;
+            }
+            return tabla;
+        }
+
+
+
     }
 }
