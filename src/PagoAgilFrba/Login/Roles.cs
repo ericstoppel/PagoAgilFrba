@@ -1,5 +1,4 @@
-﻿using PagoAgilFrba.Funcionalidades;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,50 +7,79 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PagoAgilFrba.DataBase;
+using PagoAgilFrba.Utiles;
+using PagoAgilFrba.Menus;
 
 namespace PagoAgilFrba.Login
 {
     public partial class Cl_Roles : Form
     {
-        public string rol_name;
+        SqlServer Server;
+        int idSucursal;
+        int idRol;
 
-        public Cl_Roles(int idUsuario)
+        public Cl_Roles(int _idSucursal, int _idRol)
         {
+            Server = new SqlServer();
             InitializeComponent();
-            Cmb_Roles.DropDownStyle = ComboBoxStyle.DropDownList;
-            rol_name = "";
-            Cmb_Roles = LLenarCombo.FillComboBox(Cmb_Roles, "SP_Get_Usuario_Rol", idUsuario);
-            if (Cmb_Roles.Items.Count.Equals(1))
+            idSucursal = _idSucursal;
+            idRol = _idRol;
+            cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSucursal.DropDownStyle = ComboBoxStyle.DropDownList;
+            if (idSucursal == -1)
             {
-                Cmb_Roles.SelectedIndex = 0;
-                DataRowView fila = (DataRowView)Cmb_Roles.Items[0];
-                rol_name = fila["Nombre"].ToString();
-                this.Close();
+                cmbSucursal.Visible = true;
+                lblSucursal.Visible = true;
+                CargarSucursales();
+            }
+            
+            if (idRol == -1) {
+                cmbRol.Visible = true;
+                lblRol.Visible = true;
+                CargarRoles();
+            }   
+        }
 
+        private void CargarDatos(ComboBox combo, String procedure) {
+            var paramsProcedure = new Dictionary<string, string>();
+            paramsProcedure.Add("id_usuario", Global.IdUsuario.ToString());
+            DataTable sucursales = Server.EjecutarSp(procedure, paramsProcedure);
+            if (Utiles.Utiles.handleError(sucursales))
+            {
+                combo.DataSource = sucursales;
+                combo.DisplayMember = "Nombre";
             }
         }
 
-        private void Roles_Load(object sender, EventArgs e)
-        {
-
+        private void CargarRoles() {
+            CargarDatos(cmbRol, "SP_Get_Roles_Usuario");
         }
 
-        private void Cmb_Roles_SelectedIndexChanged(object sender, EventArgs e)
+        private void CargarSucursales()
         {
-
+            CargarDatos(cmbSucursal, "SP_Get_Sucursales_Usuario");
         }
 
-        private void Btn_Aceptar_Click(object sender, EventArgs e)
+        private void btnAceptar_Click(object sender, EventArgs e)
         {
-            DataRowView seleccion = (DataRowView)Cmb_Roles.SelectedItem;
-            rol_name = seleccion.Row[0].ToString();
-            if (rol_name.Equals("") == true)
-                MessageBox.Show("Seleccione un rol");
-            else
-            {
-                this.Close();
-
+            if (idRol == -1) {
+                DataRowView rol = (DataRowView)cmbRol.Items[Convert.ToInt32(cmbRol.SelectedIndex)];
+                idRol = Convert.ToInt32(rol[0]);
             }
+
+            if (idSucursal == -1)
+            {
+                DataRowView sucursal = (DataRowView)cmbSucursal.Items[Convert.ToInt32(cmbSucursal.SelectedIndex)];
+                idSucursal = Convert.ToInt32(sucursal[0]);
+            }
+            Global.IdRol = idRol;
+            Global.IdSucursal = idSucursal;
+            MenuInicial menu = new MenuInicial();
+            menu.ShowDialog();
+            Close();
         }
+
+
     }
 }

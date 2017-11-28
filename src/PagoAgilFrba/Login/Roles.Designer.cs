@@ -28,62 +28,107 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Cmb_Roles = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Btn_Aceptar = new System.Windows.Forms.Button();
+            this.cmbRol = new System.Windows.Forms.ComboBox();
+            this.lblRol = new System.Windows.Forms.Label();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblSucursal = new System.Windows.Forms.Label();
+            this.cmbSucursal = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // Cmb_Roles
+            // cmbRol
             // 
-            this.Cmb_Roles.FormattingEnabled = true;
-            this.Cmb_Roles.Location = new System.Drawing.Point(171, 86);
-            this.Cmb_Roles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Cmb_Roles.Name = "Cmb_Roles";
-            this.Cmb_Roles.Size = new System.Drawing.Size(175, 21);
-            this.Cmb_Roles.TabIndex = 0;
-            this.Cmb_Roles.SelectedIndexChanged += new System.EventHandler(this.Cmb_Roles_SelectedIndexChanged);
+            this.cmbRol.FormattingEnabled = true;
+            this.cmbRol.Location = new System.Drawing.Point(104, 57);
+            this.cmbRol.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbRol.Name = "cmbRol";
+            this.cmbRol.Size = new System.Drawing.Size(175, 21);
+            this.cmbRol.TabIndex = 0;
+            this.cmbRol.Visible = false;
             // 
-            // label1
+            // lblRol
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(171, 65);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Seleccione un rol";
+            this.lblRol.AutoSize = true;
+            this.lblRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRol.Location = new System.Drawing.Point(11, 57);
+            this.lblRol.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRol.Name = "lblRol";
+            this.lblRol.Size = new System.Drawing.Size(37, 20);
+            this.lblRol.TabIndex = 1;
+            this.lblRol.Text = "Rol:";
+            this.lblRol.Visible = false;
             // 
-            // Btn_Aceptar
+            // btnAceptar
             // 
-            this.Btn_Aceptar.Location = new System.Drawing.Point(221, 117);
-            this.Btn_Aceptar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Btn_Aceptar.Name = "Btn_Aceptar";
-            this.Btn_Aceptar.Size = new System.Drawing.Size(73, 25);
-            this.Btn_Aceptar.TabIndex = 2;
-            this.Btn_Aceptar.Text = "Aceptar";
-            this.Btn_Aceptar.UseVisualStyleBackColor = true;
-            this.Btn_Aceptar.Click += new System.EventHandler(this.Btn_Aceptar_Click);
+            this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAceptar.Location = new System.Drawing.Point(194, 146);
+            this.btnAceptar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(117, 41);
+            this.btnAceptar.TabIndex = 2;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(148, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(244, 20);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Configuracion de inicio de sesion:";
+            // 
+            // lblSucursal
+            // 
+            this.lblSucursal.AutoSize = true;
+            this.lblSucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSucursal.Location = new System.Drawing.Point(11, 92);
+            this.lblSucursal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSucursal.Name = "lblSucursal";
+            this.lblSucursal.Size = new System.Drawing.Size(75, 20);
+            this.lblSucursal.TabIndex = 5;
+            this.lblSucursal.Text = "Sucursal:";
+            this.lblSucursal.Visible = false;
+            // 
+            // cmbSucursal
+            // 
+            this.cmbSucursal.FormattingEnabled = true;
+            this.cmbSucursal.Location = new System.Drawing.Point(104, 94);
+            this.cmbSucursal.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbSucursal.Name = "cmbSucursal";
+            this.cmbSucursal.Size = new System.Drawing.Size(175, 21);
+            this.cmbSucursal.TabIndex = 4;
+            this.cmbSucursal.Visible = false;
             // 
             // Cl_Roles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(531, 238);
-            this.Controls.Add(this.Btn_Aceptar);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.Cmb_Roles);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ClientSize = new System.Drawing.Size(533, 210);
+            this.Controls.Add(this.lblSucursal);
+            this.Controls.Add(this.cmbSucursal);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btnAceptar);
+            this.Controls.Add(this.lblRol);
+            this.Controls.Add(this.cmbRol);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Cl_Roles";
             this.Text = "Roles";
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox Cmb_Roles;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button Btn_Aceptar;
+        private System.Windows.Forms.ComboBox cmbRol;
+        private System.Windows.Forms.Label lblRol;
+        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblSucursal;
+        private System.Windows.Forms.ComboBox cmbSucursal;
     }
 }

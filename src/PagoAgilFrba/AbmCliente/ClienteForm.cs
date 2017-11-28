@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PagoAgilFrba.Funcionalidades;
-using PagoAgilFrba.Conexiones;
+using PagoAgilFrba.DataBase;
 using PagoAgilFrba.AbmCliente;
+using PagoAgilFrba.Utiles;
 
 namespace PagoAgilFrba.Abm_Cliente
 {
@@ -17,7 +18,10 @@ namespace PagoAgilFrba.Abm_Cliente
     {
         public Cl_Abm_Cliente()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            this.dgvClientes.DataSource = GetClientes();
+            Utiles.Utiles.AgregarBotonDGV(dgvClientes, "Editar");
+            Utiles.Utiles.AgregarBotonDGV(dgvClientes, "Borrar");
         }
 
         private static DataTable GetClientes()
@@ -41,28 +45,6 @@ namespace PagoAgilFrba.Abm_Cliente
         {
             CrearCliente crearCliente = new CrearCliente();
             crearCliente.Show();
-        }
-
-        private void AgregarEditar()
-        {
-            if (dgvClientes.Columns.Contains("Editar"))
-                dgvClientes.Columns.Remove("Editar");
-            DataGridViewButtonColumn btnEditar = new DataGridViewButtonColumn();
-            btnEditar.Text = "Editar";
-            btnEditar.Name = "Editar";
-            btnEditar.UseColumnTextForButtonValue = true;
-            dgvClientes.Columns.Add(btnEditar);
-        }
-
-        private void AgregarBorrar()
-        {
-            if (dgvClientes.Columns.Contains("Borrar"))
-                dgvClientes.Columns.Remove("Borrar");
-            DataGridViewButtonColumn btnBorrar = new DataGridViewButtonColumn();
-            btnBorrar.Text = "Borrar";
-            btnBorrar.Name = "Borrar";
-            btnBorrar.UseColumnTextForButtonValue = true;
-            dgvClientes.Columns.Add(btnBorrar);
         }
 
         private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)

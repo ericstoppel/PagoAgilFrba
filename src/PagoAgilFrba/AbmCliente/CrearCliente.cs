@@ -1,4 +1,4 @@
-﻿using PagoAgilFrba.Conexiones;
+﻿using PagoAgilFrba.DataBase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

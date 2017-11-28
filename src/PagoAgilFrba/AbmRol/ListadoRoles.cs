@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PagoAgilFrba.Conexiones;
+using PagoAgilFrba.DataBase;
 using PagoAgilFrba.Utiles;
 
 namespace PagoAgilFrba.AbmRol
@@ -24,15 +24,12 @@ namespace PagoAgilFrba.AbmRol
         }
 
         public void CargarRoles() {
+            Utiles.Utiles.AgregarBotonDGV(Table_Roles, "Editar");
             DataTable roles = Server.EjecutarSp("SP_Get_Roles");
             if (Utiles.Utiles.handleError(roles)) {
                 this.Table_Roles.DataSource = roles;
+                
             } 
-        }
-
-        private void Table_Roles_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,7 +43,7 @@ namespace PagoAgilFrba.AbmRol
             if (Table_Roles.SelectedRows.Count > 0)
             {
                 DataGridViewRow rolSeleccionado = Table_Roles.SelectedRows[0];
-                int idRol = Convert.ToInt32(rolSeleccionado.Cells[0].Value);
+                int idRol = Convert.ToInt32(rolSeleccionado.Cells[1].Value);
                 var paramsProcedure = new Dictionary<string, string>();
                 paramsProcedure.Add("id_rol", idRol.ToString());
                 DataTable resultado = Server.EjecutarSp("SP_Delete_Rol", paramsProcedure);
@@ -66,14 +63,33 @@ namespace PagoAgilFrba.AbmRol
             if (Table_Roles.SelectedRows.Count > 0)
             {
                 DataGridViewRow rolSeleccionado = Table_Roles.SelectedRows[0];
-                int idRol = Convert.ToInt32(rolSeleccionado.Cells[0].Value);
-                String nombreRol = rolSeleccionado.Cells[1].Value.ToString();
-                String activo = rolSeleccionado.Cells[2].Value.ToString();
-                PantallaRol pantallaRol = new PantallaRol(idRol, nombreRol, activo, this);
-                pantallaRol.ShowDialog();
+                EditarRol(rolSeleccionado);
             }
             else {
                 MessageBox.Show("No hay ningun rol seleccionado (debe seleccionar toda la fila)");
+            }
+        }
+
+        private void EditarRol(DataGridViewRow rol) {
+            int idRol = Convert.ToInt32(rol.Cells[1].Value);
+            String nombreRol = rol.Cells[2].Value.ToString();
+            String activo = rol.Cells[3].Value.ToString();
+            PantallaRol pantallaRol = new PantallaRol(idRol, nombreRol, activo, this);
+            pantallaRol.ShowDialog();
+        }
+
+        private void Table_Roles_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow rolSeleccionado = Table_Roles.Rows[e.RowIndex];
+            EditarRol(rolSeleccionado);
+        }
+
+        private void Table_Roles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Utiles.Utiles.ValidarColumna(Table_Roles, "Editar", e))
+            {
+                DataGridViewRow rolSeleccionado = Table_Roles.Rows[e.RowIndex];
+                EditarRol(rolSeleccionado);
             }
         }
     }

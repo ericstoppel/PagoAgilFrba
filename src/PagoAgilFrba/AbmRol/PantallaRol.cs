@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PagoAgilFrba.Conexiones;
+using PagoAgilFrba.DataBase;
 using PagoAgilFrba.Utiles;
 
 namespace PagoAgilFrba.AbmRol

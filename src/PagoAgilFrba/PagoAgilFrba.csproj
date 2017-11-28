@@ -80,17 +80,29 @@
     <Compile Include="AbmEmpresa\EmpresaForm.Designer.cs">
       <DependentUpon>EmpresaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmFactura\Form1.cs">
+    <Compile Include="AbmFactura\ListadoFacturas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmFactura\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmFactura\ListadoFacturas.Designer.cs">
+      <DependentUpon>ListadoFacturas.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\CrearRol.cs">
+    <Compile Include="AbmFactura\PantallaFactura.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRol\CrearRol.Designer.cs">
-      <DependentUpon>CrearRol.cs</DependentUpon>
+    <Compile Include="AbmFactura\PantallaFactura.Designer.cs">
+      <DependentUpon>PantallaFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmFactura\PantallaPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmFactura\PantallaPago.Designer.cs">
+      <DependentUpon>PantallaPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmFactura\PantallaRendicion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmFactura\PantallaRendicion.Designer.cs">
+      <DependentUpon>PantallaRendicion.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\ListadoRoles.cs">
       <SubType>Form</SubType>
@@ -130,11 +142,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Funcionalidades\ComboBoxItem.cs" />
-    <Compile Include="ListadoEstadistico\Form1.cs">
+    <Compile Include="Estadisticas\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListadoEstadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Estadisticas\ListadoEstadistico.Designer.cs">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\Login.cs">
       <SubType>Form</SubType>
@@ -154,20 +166,20 @@
     <Compile Include="Menus\MenuInicial.Designer.cs">
       <DependentUpon>MenuInicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pagos\DetallePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pagos\DetallePago.Designer.cs">
+      <DependentUpon>DetallePago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos\ListadoPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pagos\ListadoPagos.Designer.cs">
+      <DependentUpon>ListadoPagos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistroPago\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RegistroPago\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Rendicion\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Rendicion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AbmCliente\ClienteForm.resx">
       <DependentUpon>ClienteForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +189,19 @@
     <EmbeddedResource Include="AbmCliente\EditarCliente.resx">
       <DependentUpon>EditarCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="Rendicion\DetalleRendicion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rendicion\DetalleRendicion.Designer.cs">
+      <DependentUpon>DetalleRendicion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rendicion\ListadoRendiciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rendicion\ListadoRendiciones.Designer.cs">
+      <DependentUpon>ListadoRendiciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utiles\Global.cs" />
     <Compile Include="Utiles\Utiles.cs" />
     <EmbeddedResource Include="AbmEmpresa\CrearEmpresa.resx">
       <DependentUpon>CrearEmpresa.cs</DependentUpon>
@@ -187,8 +212,17 @@
     <EmbeddedResource Include="AbmEmpresa\EmpresaForm.resx">
       <DependentUpon>EmpresaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmRol\CrearRol.resx">
-      <DependentUpon>CrearRol.cs</DependentUpon>
+    <EmbeddedResource Include="AbmFactura\ListadoFacturas.resx">
+      <DependentUpon>ListadoFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmFactura\PantallaFactura.resx">
+      <DependentUpon>PantallaFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmFactura\PantallaPago.resx">
+      <DependentUpon>PantallaPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmFactura\PantallaRendicion.resx">
+      <DependentUpon>PantallaRendicion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\ListadoRoles.resx">
       <DependentUpon>ListadoRoles.cs</DependentUpon>
@@ -205,11 +239,23 @@
     <EmbeddedResource Include="AbmSucursal\SucursalForm.resx">
       <DependentUpon>SucursalForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Estadisticas\ListadoEstadistico.resx">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login\Roles.resx">
+      <DependentUpon>Roles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menus\MenuInicial.resx">
       <DependentUpon>MenuInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pagos\DetallePago.resx">
+      <DependentUpon>DetallePago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pagos\ListadoPagos.resx">
+      <DependentUpon>ListadoPagos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -220,6 +266,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Rendicion\DetalleRendicion.resx">
+      <DependentUpon>DetalleRendicion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rendicion\ListadoRendiciones.resx">
+      <DependentUpon>ListadoRendiciones.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

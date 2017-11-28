@@ -2,7 +2,11 @@
 using PagoAgilFrba.AbmEmpresa;
 using PagoAgilFrba.AbmRol;
 using PagoAgilFrba.AbmSucursal;
-using PagoAgilFrba.Conexiones;
+using PagoAgilFrba.AbmFactura;
+using PagoAgilFrba.DataBase;
+using PagoAgilFrba.Rendicion;
+using PagoAgilFrba.Pagos;
+using PagoAgilFrba.Estadisticas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,41 +21,10 @@ namespace PagoAgilFrba.Menus
 {
     public partial class MenuInicial : Form
     {
-        private int IdUsuario { get; set; }
-        private string RolUsuario { get; set; }
-
-        public MenuInicial(int idUsuario)
+       public MenuInicial()
         {
             InitializeComponent();
-            this.IdUsuario = idUsuario;
         }
-
-        public void LevantarRol(string rol)
-        {
-            SqlServer sql = new SqlServer();
-            var listaParametros = new Dictionary<string, string>();
-            DataTable tabla;
-            this.RolUsuario = rol;
-            listaParametros.Add("nombre_rol", rol);
-            tabla = sql.EjecutarSp("SP_Get_Funcionalidades_Rol", listaParametros);
-            foreach (Control subchild in this.Controls)
-            {
-                for (int i = 0; i < tabla.Rows.Count; i++)
-                {
-                    if (subchild.Name == tabla.Rows[i][0].ToString())
-                    {
-                        subchild.Enabled = true;
-                        subchild.Visible = true;
-                    }
-                }
-            }
-        }
-
-        public int getUsuario()
-        {
-            return IdUsuario;
-        }
-      
 
         private void MenuInicial_Load(object sender, EventArgs e)
         {
@@ -60,30 +33,74 @@ namespace PagoAgilFrba.Menus
 
         private void Btn_Rol_Click(object sender, EventArgs e)
         {
-            ListadoRoles rol = new ListadoRoles();
-            rol.ShowDialog();
+            if (Utiles.Utiles.validarPermisos("Roles"))
+            {
+                ListadoRoles rol = new ListadoRoles();
+                rol.ShowDialog();
+            }
         }
 
         private void Btn_ABM_Cliente_Click(object sender, EventArgs e)
         {
-            Cl_Abm_Cliente cliente = new Cl_Abm_Cliente();
-            cliente.ShowDialog();
+            if (Utiles.Utiles.validarPermisos("Clientes"))
+            {
+                Cl_Abm_Cliente cliente = new Cl_Abm_Cliente();
+                cliente.ShowDialog();
+            }
         }
 
         private void Btn_Empresa_Click(object sender, EventArgs e)
         {
-            EmpresaForm empresa = new EmpresaForm();
-            empresa.ShowDialog();
+            if (Utiles.Utiles.validarPermisos("Empresas"))
+            {
+                EmpresaForm empresa = new EmpresaForm();
+                empresa.ShowDialog();
+            }
         }
 
         private void Btn_Sucursal_Click(object sender, EventArgs e)
         {
-            SucursalForm sucursal = new SucursalForm();
-            sucursal.ShowDialog();
+            if (Utiles.Utiles.validarPermisos("Sucursales"))
+            {
+                SucursalForm sucursal = new SucursalForm();
+                sucursal.ShowDialog();
+            }
         }
 
-      
+        private void btnFacturas_Click(object sender, EventArgs e)
+        {
+            if (Utiles.Utiles.validarPermisos("Facturas"))
+            {
+                ListadoFacturas facturas = new ListadoFacturas();
+                facturas.ShowDialog();
+            }
+        }
 
-       
+        private void btnRendiciones_Click(object sender, EventArgs e)
+        {
+            if (Utiles.Utiles.validarPermisos("Rendiciones"))
+            {
+                ListadoRendiciones rendiciones = new ListadoRendiciones();
+                rendiciones.ShowDialog();
+            }
+        }
+
+        private void btnPagos_Click(object sender, EventArgs e)
+        {
+            if (Utiles.Utiles.validarPermisos("Pagos"))
+            {
+                ListadoPagos pagos = new ListadoPagos();
+                pagos.ShowDialog();
+            }
+        }
+
+        private void btnEstadisticas_Click(object sender, EventArgs e)
+        {
+            if (Utiles.Utiles.validarPermisos("Estadisticas"))
+            {
+                ListadoEstadistico listado = new ListadoEstadistico();
+                listado.Show();
+            }
+        }
     }
 }

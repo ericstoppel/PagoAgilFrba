@@ -7,23 +7,23 @@ using System.Data;
 using System.Data.SqlClient;
 using PagoAgilFrba.Properties;
 
-namespace PagoAgilFrba.Conexiones
+namespace PagoAgilFrba.DataBase
 {
     class SqlServer
     {
         public SqlConnection CrearSqlConnection()
         {
-            return new SqlConnection(this.ParametrosConexion());
+            return new SqlConnection(ConnectionConfig());
         }
 
-        private string ParametrosConexion()
+        private string ConnectionConfig()
         {
             return "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2017;Persist Security Info=True;User ID=gd;Password=gd2017;";
         }
 
         public SqlConnection AbrirConnection()
         {
-            SqlConnection sqlConexion = new SqlConnection(this.ParametrosConexion());
+            SqlConnection sqlConexion = new SqlConnection(ConnectionConfig());
             try
             {
                 sqlConexion.Open();
