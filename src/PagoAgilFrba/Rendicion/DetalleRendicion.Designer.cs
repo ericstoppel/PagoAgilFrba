@@ -45,10 +45,14 @@
             this.lblPorcentaje = new System.Windows.Forms.Label();
             this.lblDevolucion = new System.Windows.Forms.Label();
             this.grpInfoDevolucion = new System.Windows.Forms.GroupBox();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.lblMotivo = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.lblMotivo = new System.Windows.Forms.Label();
-            this.lblInfo = new System.Windows.Forms.Label();
+            this.lblMonto = new System.Windows.Forms.Label();
+            this.lblCantFacturas = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Table_Detalle)).BeginInit();
             this.grpDevolucion.SuspendLayout();
             this.grpInfoDevolucion.SuspendLayout();
@@ -69,7 +73,7 @@
             this.Table_Detalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Table_Detalle.Location = new System.Drawing.Point(26, 219);
             this.Table_Detalle.Name = "Table_Detalle";
-            this.Table_Detalle.Size = new System.Drawing.Size(649, 169);
+            this.Table_Detalle.Size = new System.Drawing.Size(1078, 169);
             this.Table_Detalle.TabIndex = 1;
             // 
             // grpDevolucion
@@ -159,7 +163,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(37, 126);
+            this.label7.Location = new System.Drawing.Point(506, 92);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 13);
             this.label7.TabIndex = 6;
@@ -199,7 +203,7 @@
             // 
             this.lblDevolucion.AutoSize = true;
             this.lblDevolucion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDevolucion.Location = new System.Drawing.Point(162, 126);
+            this.lblDevolucion.Location = new System.Drawing.Point(642, 92);
             this.lblDevolucion.Name = "lblDevolucion";
             this.lblDevolucion.Size = new System.Drawing.Size(60, 24);
             this.lblDevolucion.TabIndex = 10;
@@ -219,6 +223,22 @@
             this.grpInfoDevolucion.Text = "Devolucion";
             this.grpInfoDevolucion.Visible = false;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(425, 23);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(199, 107);
+            this.lblInfo.TabIndex = 4;
+            // 
+            // lblMotivo
+            // 
+            this.lblMotivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMotivo.Location = new System.Drawing.Point(76, 23);
+            this.lblMotivo.Name = "lblMotivo";
+            this.lblMotivo.Size = new System.Drawing.Size(199, 107);
+            this.lblMotivo.TabIndex = 3;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -237,27 +257,53 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Motivo:";
             // 
-            // lblMotivo
+            // lblMonto
             // 
-            this.lblMotivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMotivo.Location = new System.Drawing.Point(76, 23);
-            this.lblMotivo.Name = "lblMotivo";
-            this.lblMotivo.Size = new System.Drawing.Size(199, 107);
-            this.lblMotivo.TabIndex = 3;
+            this.lblMonto.AutoSize = true;
+            this.lblMonto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMonto.Location = new System.Drawing.Point(642, 58);
+            this.lblMonto.Name = "lblMonto";
+            this.lblMonto.Size = new System.Drawing.Size(60, 24);
+            this.lblMonto.TabIndex = 14;
+            this.lblMonto.Text = "label8";
             // 
-            // lblInfo
+            // lblCantFacturas
             // 
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo.Location = new System.Drawing.Point(425, 23);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(199, 107);
-            this.lblInfo.TabIndex = 4;
+            this.lblCantFacturas.AutoSize = true;
+            this.lblCantFacturas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantFacturas.Location = new System.Drawing.Point(642, 17);
+            this.lblCantFacturas.Name = "lblCantFacturas";
+            this.lblCantFacturas.Size = new System.Drawing.Size(60, 24);
+            this.lblCantFacturas.TabIndex = 13;
+            this.lblCantFacturas.Text = "label8";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(506, 59);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(40, 13);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "Monto:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(506, 25);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(108, 13);
+            this.label13.TabIndex = 11;
+            this.label13.Text = "Cantidad de facturas:";
             // 
             // DetalleRendicion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 694);
+            this.ClientSize = new System.Drawing.Size(1136, 694);
+            this.Controls.Add(this.lblMonto);
+            this.Controls.Add(this.lblCantFacturas);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.grpInfoDevolucion);
             this.Controls.Add(this.lblDevolucion);
             this.Controls.Add(this.lblPorcentaje);
@@ -305,5 +351,9 @@
         private System.Windows.Forms.Label lblMotivo;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblMonto;
+        private System.Windows.Forms.Label lblCantFacturas;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }

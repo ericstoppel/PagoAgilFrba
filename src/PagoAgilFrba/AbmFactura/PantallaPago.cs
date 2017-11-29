@@ -79,8 +79,8 @@ namespace PagoAgilFrba.AbmFactura
             paramsProcedure.Add("id_cliente", idCliente.ToString());
             paramsProcedure.Add("id_empresa", idEmpresa.ToString());
             paramsProcedure.Add("id_medio_pago", idMedioPago.ToString());
-            paramsProcedure.Add("id_usuario", "1");
-            paramsProcedure.Add("id_sucursal", "1");
+            paramsProcedure.Add("id_usuario", Global.IdUsuario);
+            paramsProcedure.Add("id_sucursal", Global.IdUsuario);
             paramsProcedure.Add("importe", importe);
             paramsProcedure.Add("numeros_factura", numerosFacturas);
 

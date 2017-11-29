@@ -86,7 +86,7 @@ namespace PagoAgilFrba.AbmFactura
 
         private void btnRendir_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Rendiciones"))
+            if (Utiles.Utiles.validarPermisos("Rendiciones", true))
             {
                 String numerosFactura = GetFacturasSeleccionadas();
                 if (numerosFactura == "")
@@ -113,7 +113,7 @@ namespace PagoAgilFrba.AbmFactura
 
         private void btnPagar_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Pagos"))
+            if (Utiles.Utiles.validarPermisos("Pagos", true))
             {
                 String numerosFactura = GetFacturasSeleccionadas();
                 if (numerosFactura == "")

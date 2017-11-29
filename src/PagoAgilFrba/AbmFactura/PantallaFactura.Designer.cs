@@ -62,6 +62,7 @@
             this.lblMotivo = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Table_Detalle_Factura)).BeginInit();
             this.grpNuevoItem.SuspendLayout();
             this.grpDevolucion.SuspendLayout();
@@ -391,11 +392,23 @@
             this.label14.TabIndex = 0;
             this.label14.Text = "Motivo:";
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Location = new System.Drawing.Point(590, 196);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(157, 43);
+            this.btnEliminar.TabIndex = 29;
+            this.btnEliminar.Text = "Dar de baja";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // PantallaFactura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(841, 676);
+            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.grpInfoDevolucion);
             this.Controls.Add(this.grpDevolucion);
             this.Controls.Add(this.lblFacturaRendida);
@@ -464,6 +477,7 @@
         private System.Windows.Forms.Label lblMotivo;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnEliminar;
 
     }
 }

@@ -39,6 +39,7 @@ namespace PagoAgilFrba.AbmFactura
             if (!editable) {
                 grpNuevoItem.Enabled = false;
                 grpDevolucion.Enabled = false;
+                btnEliminar.Enabled = false;
                 lblFacturaRendida.Visible = true;
             }
             if (_devolucion == "Si")
@@ -80,6 +81,12 @@ namespace PagoAgilFrba.AbmFactura
             String monto = txtMontoItem.Text;
             String cantidad = txtCantidad.Text;
 
+            if (nombreItem == "" || monto == "" || cantidad == "")
+            {
+                MessageBox.Show("Faltan completar datos");
+                return;
+            }
+            
             var paramsProcedure = new Dictionary<string, string>();
             paramsProcedure.Add("numero_factura", numeroFactura);
             paramsProcedure.Add("nombre", nombreItem);
@@ -101,14 +108,14 @@ namespace PagoAgilFrba.AbmFactura
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Devoluciones"))
+            if (Utiles.Utiles.validarPermisos("Devoluciones", true))
             {
                 String motivo = txtMotivo.Text;
                 String info = txtInfo.Text;
 
                 var paramsProcedure = new Dictionary<string, string>();
                 paramsProcedure.Add("motivo", motivo);
-                paramsProcedure.Add("id_usuario", "1");
+                paramsProcedure.Add("id_usuario", Global.IdUsuario);
                 paramsProcedure.Add("informacion_adicional", info);
                 paramsProcedure.Add("numero_factura", numeroFactura);
 
@@ -118,6 +125,20 @@ namespace PagoAgilFrba.AbmFactura
                     listado.CargarFacturas();
                     Close();
                 }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            var paramsProcedure = new Dictionary<string, string>();
+            paramsProcedure.Add("numero_factura", numeroFactura);
+
+            DataTable resultado = Server.EjecutarSp("SP_Eliminar_Factura", paramsProcedure);
+            if (Utiles.Utiles.handleError(resultado))
+            {
+                MessageBox.Show("Factura eliminada correctamente");
+                listado.CargarFacturas();
+                Close();
             }
         }
     }

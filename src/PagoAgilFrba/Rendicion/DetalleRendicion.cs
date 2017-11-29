@@ -18,7 +18,7 @@ namespace PagoAgilFrba.Rendicion
         String numeroRendicion;
         ListadoRendiciones listadoRendiciones;
 
-        public DetalleRendicion(ListadoRendiciones listado, String numero, String fecha, String porcentaje, String devolucion)
+        public DetalleRendicion(ListadoRendiciones listado, String numero, String fecha, String porcentaje, String cantFacturas, String monto, String devolucion)
         {
             Server = new SqlServer();
             InitializeComponent();
@@ -28,6 +28,8 @@ namespace PagoAgilFrba.Rendicion
             lblFecha.Text = fecha;
             lblNumeroRendicion.Text = numero;
             lblPorcentaje.Text = porcentaje;
+            lblCantFacturas.Text = cantFacturas;
+            lblMonto.Text = "$" + monto;
             listadoRendiciones = listado;
             CargarDetalleRendicion();
             if (devolucion == "Si") {
@@ -69,7 +71,7 @@ namespace PagoAgilFrba.Rendicion
 
             var paramsProcedure = new Dictionary<string, string>();
             paramsProcedure.Add("motivo", motivo);
-            paramsProcedure.Add("id_usuario", "1");
+            paramsProcedure.Add("id_usuario", Global.IdUsuario);
             paramsProcedure.Add("informacion_adicional", info);
             paramsProcedure.Add("numero_rendicion", numeroRendicion);
 

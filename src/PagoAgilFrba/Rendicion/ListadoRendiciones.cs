@@ -41,8 +41,10 @@ namespace PagoAgilFrba.Rendicion
                 String numero = rendicion.Cells[1].Value.ToString();
                 String fecha = rendicion.Cells[2].Value.ToString();
                 String porcentaje = rendicion.Cells[3].Value.ToString();
-                String devolucion = rendicion.Cells[4].Value.ToString();
-                DetalleRendicion detalle = new DetalleRendicion(this, numero, fecha, porcentaje, devolucion);
+                String cantFacturas = rendicion.Cells[4].Value.ToString();
+                String monto = rendicion.Cells[5].Value.ToString();
+                String devolucion = rendicion.Cells[6].Value.ToString();
+                DetalleRendicion detalle = new DetalleRendicion(this, numero, fecha, porcentaje, cantFacturas, monto, devolucion);
                 detalle.ShowDialog();
             }
         }

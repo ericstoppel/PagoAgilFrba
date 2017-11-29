@@ -28,59 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Btn_Rol = new System.Windows.Forms.Button();
-            this.Btn_ABM_Cliente = new System.Windows.Forms.Button();
-            this.Btn_Empresa = new System.Windows.Forms.Button();
-            this.Btn_Sucursal = new System.Windows.Forms.Button();
+            this.btnRoles = new System.Windows.Forms.Button();
+            this.btnClientes = new System.Windows.Forms.Button();
+            this.btnEmpresas = new System.Windows.Forms.Button();
+            this.btnSucursales = new System.Windows.Forms.Button();
             this.btnFacturas = new System.Windows.Forms.Button();
             this.btnRendiciones = new System.Windows.Forms.Button();
             this.btnPagos = new System.Windows.Forms.Button();
             this.btnEstadisticas = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Btn_Rol
+            // btnRoles
             // 
-            this.Btn_Rol.Location = new System.Drawing.Point(461, 30);
-            this.Btn_Rol.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_Rol.Name = "Btn_Rol";
-            this.Btn_Rol.Size = new System.Drawing.Size(129, 40);
-            this.Btn_Rol.TabIndex = 11;
-            this.Btn_Rol.Text = "ABM Rol";
-            this.Btn_Rol.UseVisualStyleBackColor = true;
-            this.Btn_Rol.Click += new System.EventHandler(this.Btn_Rol_Click);
+            this.btnRoles.Location = new System.Drawing.Point(461, 30);
+            this.btnRoles.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRoles.Name = "btnRoles";
+            this.btnRoles.Size = new System.Drawing.Size(129, 40);
+            this.btnRoles.TabIndex = 11;
+            this.btnRoles.Text = "ABM Rol";
+            this.btnRoles.UseVisualStyleBackColor = true;
+            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
             // 
-            // Btn_ABM_Cliente
+            // btnClientes
             // 
-            this.Btn_ABM_Cliente.Location = new System.Drawing.Point(11, 28);
-            this.Btn_ABM_Cliente.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_ABM_Cliente.Name = "Btn_ABM_Cliente";
-            this.Btn_ABM_Cliente.Size = new System.Drawing.Size(127, 42);
-            this.Btn_ABM_Cliente.TabIndex = 2;
-            this.Btn_ABM_Cliente.Text = "ABM Cliente";
-            this.Btn_ABM_Cliente.UseVisualStyleBackColor = true;
-            this.Btn_ABM_Cliente.Click += new System.EventHandler(this.Btn_ABM_Cliente_Click);
+            this.btnClientes.Location = new System.Drawing.Point(11, 28);
+            this.btnClientes.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClientes.Name = "btnClientes";
+            this.btnClientes.Size = new System.Drawing.Size(127, 42);
+            this.btnClientes.TabIndex = 2;
+            this.btnClientes.Text = "ABM Cliente";
+            this.btnClientes.UseVisualStyleBackColor = true;
+            this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click);
             // 
-            // Btn_Empresa
+            // btnEmpresas
             // 
-            this.Btn_Empresa.Location = new System.Drawing.Point(317, 28);
-            this.Btn_Empresa.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_Empresa.Name = "Btn_Empresa";
-            this.Btn_Empresa.Size = new System.Drawing.Size(127, 42);
-            this.Btn_Empresa.TabIndex = 12;
-            this.Btn_Empresa.Text = "ABM Empresa";
-            this.Btn_Empresa.UseVisualStyleBackColor = true;
-            this.Btn_Empresa.Click += new System.EventHandler(this.Btn_Empresa_Click);
+            this.btnEmpresas.Location = new System.Drawing.Point(317, 28);
+            this.btnEmpresas.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEmpresas.Name = "btnEmpresas";
+            this.btnEmpresas.Size = new System.Drawing.Size(127, 42);
+            this.btnEmpresas.TabIndex = 12;
+            this.btnEmpresas.Text = "ABM Empresa";
+            this.btnEmpresas.UseVisualStyleBackColor = true;
+            this.btnEmpresas.Click += new System.EventHandler(this.btnEmpresas_Click);
             // 
-            // Btn_Sucursal
+            // btnSucursales
             // 
-            this.Btn_Sucursal.Location = new System.Drawing.Point(169, 28);
-            this.Btn_Sucursal.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_Sucursal.Name = "Btn_Sucursal";
-            this.Btn_Sucursal.Size = new System.Drawing.Size(127, 42);
-            this.Btn_Sucursal.TabIndex = 12;
-            this.Btn_Sucursal.Text = "ABM Sucursal";
-            this.Btn_Sucursal.UseVisualStyleBackColor = true;
-            this.Btn_Sucursal.Click += new System.EventHandler(this.Btn_Sucursal_Click);
+            this.btnSucursales.Location = new System.Drawing.Point(169, 28);
+            this.btnSucursales.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSucursales.Name = "btnSucursales";
+            this.btnSucursales.Size = new System.Drawing.Size(127, 42);
+            this.btnSucursales.TabIndex = 12;
+            this.btnSucursales.Text = "ABM Sucursal";
+            this.btnSucursales.UseVisualStyleBackColor = true;
+            this.btnSucursales.Click += new System.EventHandler(this.btnSucursales_Click);
             // 
             // btnFacturas
             // 
@@ -133,24 +133,23 @@
             this.Controls.Add(this.btnPagos);
             this.Controls.Add(this.btnRendiciones);
             this.Controls.Add(this.btnFacturas);
-            this.Controls.Add(this.Btn_Empresa);
-            this.Controls.Add(this.Btn_Rol);
-            this.Controls.Add(this.Btn_ABM_Cliente);
-            this.Controls.Add(this.Btn_Sucursal);
+            this.Controls.Add(this.btnEmpresas);
+            this.Controls.Add(this.btnRoles);
+            this.Controls.Add(this.btnClientes);
+            this.Controls.Add(this.btnSucursales);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MenuInicial";
             this.Text = "MenuInicial";
-            this.Load += new System.EventHandler(this.MenuInicial_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button Btn_Rol;
-        private System.Windows.Forms.Button Btn_ABM_Cliente;
-        private System.Windows.Forms.Button Btn_Empresa;
-        private System.Windows.Forms.Button Btn_Sucursal;
+        private System.Windows.Forms.Button btnRoles;
+        private System.Windows.Forms.Button btnClientes;
+        private System.Windows.Forms.Button btnEmpresas;
+        private System.Windows.Forms.Button btnSucursales;
         private System.Windows.Forms.Button btnFacturas;
         private System.Windows.Forms.Button btnRendiciones;
         private System.Windows.Forms.Button btnPagos;

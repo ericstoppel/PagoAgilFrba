@@ -24,83 +24,73 @@ namespace PagoAgilFrba.Menus
        public MenuInicial()
         {
             InitializeComponent();
+            ValidarPermisos();
         }
 
-        private void MenuInicial_Load(object sender, EventArgs e)
-        {
+       private void ValidarPermisos() {
+           ValidarFuncionalidad("Clientes", btnClientes);
+           ValidarFuncionalidad("Empresas", btnEmpresas);
+           ValidarFuncionalidad("Sucursales", btnSucursales);
+           ValidarFuncionalidad("Roles", btnRoles);
+           ValidarFuncionalidad("Facturas", btnFacturas);
+           ValidarFuncionalidad("Pagos", btnPagos);
+           ValidarFuncionalidad("Rendiciones", btnRendiciones);
+           ValidarFuncionalidad("Estadisticas", btnEstadisticas);
+       }
 
-        }
+       private void ValidarFuncionalidad(String nombreFuncionalidad, Button boton) {
+           if (!Utiles.Utiles.validarPermisos(nombreFuncionalidad, false))
+           {
+               boton.Visible = false;
+           }
+       }
 
-        private void Btn_Rol_Click(object sender, EventArgs e)
-        {
-            if (Utiles.Utiles.validarPermisos("Roles"))
-            {
-                ListadoRoles rol = new ListadoRoles();
-                rol.ShowDialog();
-            }
-        }
+       private void btnClientes_Click(object sender, EventArgs e)
+       {
+           Cl_Abm_Cliente clientes = new Cl_Abm_Cliente();
+           clientes.ShowDialog();
+       }
 
-        private void Btn_ABM_Cliente_Click(object sender, EventArgs e)
-        {
-            if (Utiles.Utiles.validarPermisos("Clientes"))
-            {
-                Cl_Abm_Cliente cliente = new Cl_Abm_Cliente();
-                cliente.ShowDialog();
-            }
-        }
+       private void btnSucursales_Click(object sender, EventArgs e)
+       {
+           SucursalForm sucursales = new SucursalForm();
+           sucursales.ShowDialog();
+       }
 
-        private void Btn_Empresa_Click(object sender, EventArgs e)
-        {
-            if (Utiles.Utiles.validarPermisos("Empresas"))
-            {
-                EmpresaForm empresa = new EmpresaForm();
-                empresa.ShowDialog();
-            }
-        }
+       private void btnEmpresas_Click(object sender, EventArgs e)
+       {
+           EmpresaForm empresas = new EmpresaForm();
+           empresas.ShowDialog();
+       }
 
-        private void Btn_Sucursal_Click(object sender, EventArgs e)
-        {
-            if (Utiles.Utiles.validarPermisos("Sucursales"))
-            {
-                SucursalForm sucursal = new SucursalForm();
-                sucursal.ShowDialog();
-            }
-        }
+       private void btnRoles_Click(object sender, EventArgs e)
+       {
+           ListadoRoles roles = new ListadoRoles();
+           roles.ShowDialog();
+       }
 
         private void btnFacturas_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Facturas"))
-            {
-                ListadoFacturas facturas = new ListadoFacturas();
-                facturas.ShowDialog();
-            }
+            ListadoFacturas facturas = new ListadoFacturas();
+            facturas.ShowDialog();
         }
 
         private void btnRendiciones_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Rendiciones"))
-            {
-                ListadoRendiciones rendiciones = new ListadoRendiciones();
-                rendiciones.ShowDialog();
-            }
+            ListadoRendiciones rendiciones = new ListadoRendiciones();
+            rendiciones.ShowDialog();
         }
 
         private void btnPagos_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Pagos"))
-            {
-                ListadoPagos pagos = new ListadoPagos();
-                pagos.ShowDialog();
-            }
+            ListadoPagos pagos = new ListadoPagos();
+            pagos.ShowDialog();
         }
 
         private void btnEstadisticas_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Estadisticas"))
-            {
-                ListadoEstadistico listado = new ListadoEstadistico();
-                listado.Show();
-            }
+            ListadoEstadistico listado = new ListadoEstadistico();
+            listado.Show();
         }
     }
 }
