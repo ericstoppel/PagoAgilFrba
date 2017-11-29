@@ -113,18 +113,25 @@ namespace PagoAgilFrba.AbmFactura
                 String motivo = txtMotivo.Text;
                 String info = txtInfo.Text;
 
-                var paramsProcedure = new Dictionary<string, string>();
-                paramsProcedure.Add("motivo", motivo);
-                paramsProcedure.Add("id_usuario", Global.IdUsuario);
-                paramsProcedure.Add("informacion_adicional", info);
-                paramsProcedure.Add("numero_factura", numeroFactura);
-
-                DataTable resultado = Server.EjecutarSp("SP_Create_Devolucion_Factura", paramsProcedure);
-                if (Utiles.Utiles.handleError(resultado))
+                if (motivo != "" && info != "")
                 {
-                    listado.CargarFacturas();
-                    Close();
+                    var paramsProcedure = new Dictionary<string, string>();
+                    paramsProcedure.Add("motivo", motivo);
+                    paramsProcedure.Add("id_usuario", Global.IdUsuario);
+                    paramsProcedure.Add("informacion_adicional", info);
+                    paramsProcedure.Add("numero_factura", numeroFactura);
+
+                    DataTable resultado = Server.EjecutarSp("SP_Create_Devolucion_Factura", paramsProcedure);
+                    if (Utiles.Utiles.handleError(resultado))
+                    {
+                        listado.CargarFacturas();
+                        Close();
+                    }
                 }
+                else {
+                    MessageBox.Show("Faltan completar datos");
+                }
+                
             }
         }
 

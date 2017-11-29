@@ -68,19 +68,26 @@ namespace PagoAgilFrba.Rendicion
             String motivo = txtMotivo.Text;
             String info = txtInfo.Text;
 
+            if (motivo != "" && info != "") {
+                var paramsProcedure = new Dictionary<string, string>();
+                paramsProcedure.Add("motivo", motivo);
+                paramsProcedure.Add("id_usuario", Global.IdUsuario);
+                paramsProcedure.Add("informacion_adicional", info);
+                paramsProcedure.Add("numero_rendicion", numeroRendicion);
 
-            var paramsProcedure = new Dictionary<string, string>();
-            paramsProcedure.Add("motivo", motivo);
-            paramsProcedure.Add("id_usuario", Global.IdUsuario);
-            paramsProcedure.Add("informacion_adicional", info);
-            paramsProcedure.Add("numero_rendicion", numeroRendicion);
-
-            DataTable resultado = Server.EjecutarSp("SP_Create_Devolucion_Rendicion", paramsProcedure);
-            if (Utiles.Utiles.handleError(resultado))
-            {
-                listadoRendiciones.CargarRendiciones();
-                Close();
+                DataTable resultado = Server.EjecutarSp("SP_Create_Devolucion_Rendicion", paramsProcedure);
+                if (Utiles.Utiles.handleError(resultado))
+                {
+                    listadoRendiciones.CargarRendiciones();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Faltan completar datos");
+                }
             }
+
+            
         }
     }
 }

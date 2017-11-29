@@ -100,6 +100,7 @@
             this.btnFiltrarSucursales.TabIndex = 18;
             this.btnFiltrarSucursales.Text = "Filtrar";
             this.btnFiltrarSucursales.UseVisualStyleBackColor = true;
+            this.btnFiltrarSucursales.Click += new System.EventHandler(this.btnFiltrarSucursales_Click);
             // 
             // txtFiltroCodigoPostal
             // 

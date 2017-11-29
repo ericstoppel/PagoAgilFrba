@@ -38,7 +38,7 @@
             this.Table_Rendiciones.Location = new System.Drawing.Point(12, 12);
             this.Table_Rendiciones.Name = "Table_Rendiciones";
             this.Table_Rendiciones.ReadOnly = true;
-            this.Table_Rendiciones.Size = new System.Drawing.Size(642, 219);
+            this.Table_Rendiciones.Size = new System.Drawing.Size(923, 219);
             this.Table_Rendiciones.TabIndex = 0;
             this.Table_Rendiciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Table_Rendiciones_CellClick);
             // 
@@ -46,7 +46,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 271);
+            this.ClientSize = new System.Drawing.Size(947, 271);
             this.Controls.Add(this.Table_Rendiciones);
             this.Name = "ListadoRendiciones";
             this.Text = "ListadoRendiciones";

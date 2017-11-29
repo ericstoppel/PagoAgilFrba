@@ -28,7 +28,7 @@ namespace PagoAgilFrba.AbmEmpresa
         private void EditarEmpresa_Load(object sender, EventArgs e)
         {
             SqlServer sql = new SqlServer();
-            DataTable tablaRubros = sql.EjecutarSp("PR_Get_Rubros");
+            DataTable tablaRubros = sql.EjecutarSp("SP_Get_Rubros");
 
             if (tablaRubros.Rows.Count > 0 && tablaRubros.Rows[0].ItemArray[0].ToString() == "ERROR")
             {
@@ -130,7 +130,7 @@ namespace PagoAgilFrba.AbmEmpresa
                 listaParametros.Add("direccion", this.txtDireccion.Text);
                 listaParametros.Add("cuit", this.txtCuit.Text);
                 listaParametros.Add("id_rubro", idRubro);
-                listaParametros.Add("activo", this.txtActivo.Text);
+                listaParametros.Add("activo", txtActivo.Text);
 
                 DataTable tabla = sql.EjecutarSp("SP_Update_Empresa", listaParametros);
                 if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")

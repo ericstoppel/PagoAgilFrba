@@ -116,7 +116,7 @@ namespace PagoAgilFrba.AbmEmpresa
         private void CrearEmpresa_Load(object sender, EventArgs e)
         {
             SqlServer sql = new SqlServer();
-            DataTable tabla = sql.EjecutarSp("PR_Get_Rubros");
+            DataTable tabla = sql.EjecutarSp("SP_Get_Rubros");
 
             if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
             {

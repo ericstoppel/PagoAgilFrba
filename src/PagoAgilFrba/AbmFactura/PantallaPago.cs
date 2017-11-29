@@ -42,7 +42,7 @@ namespace PagoAgilFrba.AbmFactura
 
         private void CargarEmpresas()
         {
-            DataTable empresas = Server.EjecutarSp("PR_Get_Empresas");
+            DataTable empresas = Server.EjecutarSp("SP_Get_Empresas");
             if (Utiles.Utiles.handleError(empresas))
             {
                 cmbEmpresas.DataSource = empresas;

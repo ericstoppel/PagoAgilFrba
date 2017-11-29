@@ -33,7 +33,7 @@ namespace PagoAgilFrba.AbmSucursal
         public static DataTable GetSucursales()
         {
             SqlServer sql = new SqlServer();
-            DataTable tabla = sql.EjecutarSp("PR_Get_Sucursales");
+            DataTable tabla = sql.EjecutarSp("SP_Get_Sucursales");
             if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
             {
                 MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
@@ -101,6 +101,28 @@ namespace PagoAgilFrba.AbmSucursal
         public void ActualizarSucursalForm()
         {
             this.dgvSucursales.DataSource = GetSucursales();
+            AgregarEditar();
+            AgregarBorrar();
+        }
+
+        private void btnFiltrarSucursales_Click(object sender, EventArgs e)
+        {
+            String filtroNombre = this.txtFiltroNombre.Text;
+            String filtroDireccion = this.txtFiltroDireccion.Text;
+            String filtroCP = this.txtFiltroCodigoPostal.Text;
+
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            listaParametros.Add("nombre", filtroNombre);
+            listaParametros.Add("direccion", filtroDireccion);
+            listaParametros.Add("codigo_postal", filtroCP);
+
+            DataTable tabla = sql.EjecutarSp("SP_Get_Sucursales_x_Campos", listaParametros);
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+            }
+            this.dgvSucursales.DataSource = tabla;
             AgregarEditar();
             AgregarBorrar();
         }

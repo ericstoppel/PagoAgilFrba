@@ -100,6 +100,7 @@
             this.btnFiltrarClientes.TabIndex = 18;
             this.btnFiltrarClientes.Text = "Filtrar";
             this.btnFiltrarClientes.UseVisualStyleBackColor = true;
+            this.btnFiltrarClientes.Click += new System.EventHandler(this.btnFiltrarClientes_Click);
             // 
             // label4
             // 
@@ -114,7 +115,7 @@
             // 
             this.txtFiltroCuit.Location = new System.Drawing.Point(162, 110);
             this.txtFiltroCuit.Name = "txtFiltroCuit";
-            this.txtFiltroCuit.Size = new System.Drawing.Size(100, 20);
+            this.txtFiltroCuit.Size = new System.Drawing.Size(121, 20);
             this.txtFiltroCuit.TabIndex = 15;
             // 
             // label3
@@ -130,7 +131,7 @@
             // 
             this.txtFiltroNombre.Location = new System.Drawing.Point(162, 75);
             this.txtFiltroNombre.Name = "txtFiltroNombre";
-            this.txtFiltroNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtFiltroNombre.Size = new System.Drawing.Size(121, 20);
             this.txtFiltroNombre.TabIndex = 13;
             // 
             // label2

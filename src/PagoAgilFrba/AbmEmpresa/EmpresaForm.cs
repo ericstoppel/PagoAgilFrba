@@ -16,12 +16,13 @@ namespace PagoAgilFrba.AbmEmpresa
         public EmpresaForm()
         {
             InitializeComponent();
+            cmbRubro.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private static DataTable GetEmpresas()
         {
             SqlServer sql = new SqlServer();
-            DataTable tabla = sql.EjecutarSp("PR_Get_Empresas");
+            DataTable tabla = sql.EjecutarSp("SP_Get_Empresas");
             if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
             {
                 MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
@@ -73,7 +74,7 @@ namespace PagoAgilFrba.AbmEmpresa
         private void EmpresaForm_Load(object sender, EventArgs e)
         {
             SqlServer sql = new SqlServer();
-            DataTable tabla = sql.EjecutarSp("PR_Get_Rubros");
+            DataTable tabla = sql.EjecutarSp("SP_Get_Rubros");
 
             if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
             {
@@ -112,6 +113,32 @@ namespace PagoAgilFrba.AbmEmpresa
                 ActualizarEmpresaForm();
                 return;
             }
+        }
+
+        private void btnFiltrarClientes_Click(object sender, EventArgs e)
+        {
+            String filtroNombre = this.txtFiltroNombre.Text;
+            String filtroCuit = this.txtFiltroCuit.Text;
+            String idRubro = "-1";
+            if (cmbRubro.SelectedIndex != -1) {
+                DataRowView rubro = (DataRowView)cmbRubro.Items[Convert.ToInt32(cmbRubro.SelectedIndex)];
+                idRubro = rubro[0].ToString();
+            }
+
+            SqlServer sql = new SqlServer();
+            var listaParametros = new Dictionary<string, string>();
+            listaParametros.Add("nombre", filtroNombre);
+            listaParametros.Add("cuit", filtroCuit);
+            listaParametros.Add("id_rubro", idRubro);
+
+            DataTable tabla = sql.EjecutarSp("SP_Get_Empresas_x_Campos", listaParametros);
+            if (tabla.Rows.Count > 0 && tabla.Rows[0].ItemArray[0].ToString() == "ERROR")
+            {
+                MessageBox.Show(tabla.Rows[0].ItemArray[1].ToString());
+            }
+            this.dgvEmpresas.DataSource = tabla;
+            AgregarEditar();
+            AgregarBorrar();
         }
 
 
