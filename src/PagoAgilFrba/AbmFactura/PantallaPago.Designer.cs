@@ -36,8 +36,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbMedioPago = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtImporte = new System.Windows.Forms.TextBox();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -62,7 +60,7 @@
             // cmbClientes
             // 
             this.cmbClientes.FormattingEnabled = true;
-            this.cmbClientes.Location = new System.Drawing.Point(84, 62);
+            this.cmbClientes.Location = new System.Drawing.Point(97, 62);
             this.cmbClientes.Name = "cmbClientes";
             this.cmbClientes.Size = new System.Drawing.Size(121, 21);
             this.cmbClientes.TabIndex = 13;
@@ -70,7 +68,7 @@
             // cmbEmpresas
             // 
             this.cmbEmpresas.FormattingEnabled = true;
-            this.cmbEmpresas.Location = new System.Drawing.Point(84, 101);
+            this.cmbEmpresas.Location = new System.Drawing.Point(97, 101);
             this.cmbEmpresas.Name = "cmbEmpresas";
             this.cmbEmpresas.Size = new System.Drawing.Size(121, 21);
             this.cmbEmpresas.TabIndex = 14;
@@ -111,26 +109,10 @@
             this.cmbMedioPago.Size = new System.Drawing.Size(121, 21);
             this.cmbMedioPago.TabIndex = 18;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 187);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 13);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Importe:";
-            // 
-            // txtImporte
-            // 
-            this.txtImporte.Location = new System.Drawing.Point(87, 187);
-            this.txtImporte.Name = "txtImporte";
-            this.txtImporte.Size = new System.Drawing.Size(100, 20);
-            this.txtImporte.TabIndex = 20;
-            // 
             // btnConfirmar
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmar.Location = new System.Drawing.Point(196, 229);
+            this.btnConfirmar.Location = new System.Drawing.Point(51, 209);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(154, 51);
             this.btnConfirmar.TabIndex = 21;
@@ -142,10 +124,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(562, 309);
+            this.ClientSize = new System.Drawing.Size(268, 295);
             this.Controls.Add(this.btnConfirmar);
-            this.Controls.Add(this.txtImporte);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbMedioPago);
             this.Controls.Add(this.lblNumerosFactura);
@@ -171,8 +151,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbMedioPago;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtImporte;
         private System.Windows.Forms.Button btnConfirmar;
     }
 }

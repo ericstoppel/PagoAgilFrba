@@ -62,12 +62,6 @@ namespace PagoAgilFrba.AbmFactura
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            String importe = txtImporte.Text;
-            if (importe == "" || !Utiles.Utiles.isNumeric(importe)) {
-                MessageBox.Show("El importe no es valido");
-                return;
-            }
-
             DataRowView cliente = (DataRowView)cmbClientes.Items[Convert.ToInt32(cmbClientes.SelectedIndex)];
             int idCliente = Convert.ToInt32(cliente[0]);
             DataRowView empresa = (DataRowView)cmbEmpresas.Items[Convert.ToInt32(cmbEmpresas.SelectedIndex)];
@@ -81,7 +75,6 @@ namespace PagoAgilFrba.AbmFactura
             paramsProcedure.Add("id_medio_pago", idMedioPago.ToString());
             paramsProcedure.Add("id_usuario", Global.IdUsuario);
             paramsProcedure.Add("id_sucursal", Global.IdUsuario);
-            paramsProcedure.Add("importe", importe);
             paramsProcedure.Add("numeros_factura", numerosFacturas);
 
             DataTable resultado = Server.EjecutarSp("SP_Create_Pago", paramsProcedure);
