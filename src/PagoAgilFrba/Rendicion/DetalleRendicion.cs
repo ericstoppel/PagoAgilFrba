@@ -37,6 +37,11 @@ namespace PagoAgilFrba.Rendicion
                 grpInfoDevolucion.Visible = true;
                 CargarDevolucion();
             }
+            if (!Utiles.Utiles.validarPermisos("Devoluciones rendiciones"))
+            {
+                grpInfoDevolucion.Visible = false;
+                grpDevolucion.Visible = false;
+            }
         }
 
         public void CargarDetalleRendicion() {

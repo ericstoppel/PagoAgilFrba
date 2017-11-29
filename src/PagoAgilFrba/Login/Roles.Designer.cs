@@ -39,7 +39,7 @@
             // cmbRol
             // 
             this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(104, 57);
+            this.cmbRol.Location = new System.Drawing.Point(217, 59);
             this.cmbRol.Margin = new System.Windows.Forms.Padding(2);
             this.cmbRol.Name = "cmbRol";
             this.cmbRol.Size = new System.Drawing.Size(175, 21);
@@ -48,20 +48,21 @@
             // 
             // lblRol
             // 
+            this.lblRol.AllowDrop = true;
             this.lblRol.AutoSize = true;
             this.lblRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRol.Location = new System.Drawing.Point(11, 57);
+            this.lblRol.Location = new System.Drawing.Point(22, 60);
             this.lblRol.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(37, 20);
+            this.lblRol.Size = new System.Drawing.Size(123, 20);
             this.lblRol.TabIndex = 1;
-            this.lblRol.Text = "Rol:";
+            this.lblRol.Text = "Ingresar con rol:";
             this.lblRol.Visible = false;
             // 
             // btnAceptar
             // 
             this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptar.Location = new System.Drawing.Point(194, 146);
+            this.btnAceptar.Location = new System.Drawing.Point(165, 136);
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(117, 41);
@@ -84,18 +85,18 @@
             // 
             this.lblSucursal.AutoSize = true;
             this.lblSucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSucursal.Location = new System.Drawing.Point(11, 92);
+            this.lblSucursal.Location = new System.Drawing.Point(22, 95);
             this.lblSucursal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSucursal.Name = "lblSucursal";
-            this.lblSucursal.Size = new System.Drawing.Size(75, 20);
+            this.lblSucursal.Size = new System.Drawing.Size(165, 20);
             this.lblSucursal.TabIndex = 5;
-            this.lblSucursal.Text = "Sucursal:";
+            this.lblSucursal.Text = "Ingresar con sucursal:";
             this.lblSucursal.Visible = false;
             // 
             // cmbSucursal
             // 
             this.cmbSucursal.FormattingEnabled = true;
-            this.cmbSucursal.Location = new System.Drawing.Point(104, 94);
+            this.cmbSucursal.Location = new System.Drawing.Point(217, 96);
             this.cmbSucursal.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.Size = new System.Drawing.Size(175, 21);

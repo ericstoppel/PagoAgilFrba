@@ -39,7 +39,7 @@ namespace PagoAgilFrba.Menus
        }
 
        private void ValidarFuncionalidad(String nombreFuncionalidad, Button boton) {
-           if (!Utiles.Utiles.validarPermisos(nombreFuncionalidad, false))
+           if (!Utiles.Utiles.validarPermisos(nombreFuncionalidad))
            {
                boton.Visible = false;
            }

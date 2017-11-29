@@ -32,7 +32,7 @@ namespace PagoAgilFrba.Utiles
             return false;
         }
 
-        public static bool validarPermisos(String nombreFuncionalidad, bool mostrarMensaje)
+        public static bool validarPermisos(String nombreFuncionalidad)
         {
             SqlServer Server = new SqlServer();
             var paramsProcedure = new Dictionary<string, string>();
@@ -44,10 +44,6 @@ namespace PagoAgilFrba.Utiles
                 if (resultado.Rows[0].ItemArray[0].ToString() == "1")
                 {
                     return true;
-                }
-
-                if (mostrarMensaje) {
-                    MessageBox.Show("No tiene permisos para realizar esta operacion");
                 }
             }
             return false;

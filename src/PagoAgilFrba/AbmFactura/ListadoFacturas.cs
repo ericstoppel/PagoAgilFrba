@@ -24,6 +24,15 @@ namespace PagoAgilFrba.AbmFactura
             CargarFacturas();
             CargarClientes();
             CargarEmpresas();
+            if (!Utiles.Utiles.validarPermisos("Rendiciones"))
+            {
+                btnRendir.Visible = false;
+            }
+
+            if (!Utiles.Utiles.validarPermisos("Pagos"))
+            {
+                btnPagar.Visible = false;
+            }
         }
 
 
@@ -86,17 +95,14 @@ namespace PagoAgilFrba.AbmFactura
 
         private void btnRendir_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Rendiciones", true))
+            String numerosFactura = GetFacturasSeleccionadas();
+            if (numerosFactura == "")
             {
-                String numerosFactura = GetFacturasSeleccionadas();
-                if (numerosFactura == "")
-                {
-                    MessageBox.Show("No hay facturas seleccionadas");
-                    return;
-                }
-                PantallaRendicion rendicion = new PantallaRendicion(this, numerosFactura);
-                rendicion.ShowDialog();
+                MessageBox.Show("No hay facturas seleccionadas");
+                return;
             }
+            PantallaRendicion rendicion = new PantallaRendicion(this, numerosFactura);
+            rendicion.ShowDialog();
         }
 
         private String GetFacturasSeleccionadas() {
@@ -113,17 +119,14 @@ namespace PagoAgilFrba.AbmFactura
 
         private void btnPagar_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Pagos", true))
+            String numerosFactura = GetFacturasSeleccionadas();
+            if (numerosFactura == "")
             {
-                String numerosFactura = GetFacturasSeleccionadas();
-                if (numerosFactura == "")
-                {
-                    MessageBox.Show("No hay facturas seleccionadas");
-                    return;
-                }
-                PantallaPago rendicion = new PantallaPago(this, numerosFactura);
-                rendicion.ShowDialog();
+                MessageBox.Show("No hay facturas seleccionadas");
+                return;
             }
+            PantallaPago rendicion = new PantallaPago(this, numerosFactura);
+            rendicion.ShowDialog();
         }
 
         private void Table_Facturas_CellClick(object sender, DataGridViewCellEventArgs e)

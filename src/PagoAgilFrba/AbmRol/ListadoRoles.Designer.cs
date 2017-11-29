@@ -30,7 +30,6 @@
         {
             this.Table_Roles = new System.Windows.Forms.DataGridView();
             this.btnNuevoRol = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Table_Roles)).BeginInit();
             this.SuspendLayout();
@@ -65,19 +64,9 @@
             this.btnNuevoRol.UseVisualStyleBackColor = true;
             this.btnNuevoRol.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnEditar
-            // 
-            this.btnEditar.Location = new System.Drawing.Point(126, 215);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(75, 23);
-            this.btnEditar.TabIndex = 3;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(233, 215);
+            this.btnEliminar.Location = new System.Drawing.Point(120, 215);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 4;
@@ -91,7 +80,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 359);
             this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnNuevoRol);
             this.Controls.Add(this.Table_Roles);
             this.Name = "ListadoRoles";
@@ -105,7 +93,6 @@
 
         private System.Windows.Forms.DataGridView Table_Roles;
         private System.Windows.Forms.Button btnNuevoRol;
-        private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnEliminar;
     }
 }

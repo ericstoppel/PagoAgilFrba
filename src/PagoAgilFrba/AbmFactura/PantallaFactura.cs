@@ -49,6 +49,10 @@ namespace PagoAgilFrba.AbmFactura
                 grpInfoDevolucion.Visible = true;
                 CargarDevolucion();
             }
+            if (!Utiles.Utiles.validarPermisos("Devoluciones facturas")) {
+                grpInfoDevolucion.Visible = false;
+                grpDevolucion.Visible = false;
+            }
         }
 
         private void CargarDevolucion()
@@ -108,30 +112,26 @@ namespace PagoAgilFrba.AbmFactura
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Utiles.Utiles.validarPermisos("Devoluciones", true))
+            String motivo = txtMotivo.Text;
+            String info = txtInfo.Text;
+
+            if (motivo != "" && info != "")
             {
-                String motivo = txtMotivo.Text;
-                String info = txtInfo.Text;
+                var paramsProcedure = new Dictionary<string, string>();
+                paramsProcedure.Add("motivo", motivo);
+                paramsProcedure.Add("id_usuario", Global.IdUsuario);
+                paramsProcedure.Add("informacion_adicional", info);
+                paramsProcedure.Add("numero_factura", numeroFactura);
 
-                if (motivo != "" && info != "")
+                DataTable resultado = Server.EjecutarSp("SP_Create_Devolucion_Factura", paramsProcedure);
+                if (Utiles.Utiles.handleError(resultado))
                 {
-                    var paramsProcedure = new Dictionary<string, string>();
-                    paramsProcedure.Add("motivo", motivo);
-                    paramsProcedure.Add("id_usuario", Global.IdUsuario);
-                    paramsProcedure.Add("informacion_adicional", info);
-                    paramsProcedure.Add("numero_factura", numeroFactura);
-
-                    DataTable resultado = Server.EjecutarSp("SP_Create_Devolucion_Factura", paramsProcedure);
-                    if (Utiles.Utiles.handleError(resultado))
-                    {
-                        listado.CargarFacturas();
-                        Close();
-                    }
+                    listado.CargarFacturas();
+                    Close();
                 }
-                else {
-                    MessageBox.Show("Faltan completar datos");
-                }
-                
+            }
+            else {
+                MessageBox.Show("Faltan completar datos");
             }
         }
 

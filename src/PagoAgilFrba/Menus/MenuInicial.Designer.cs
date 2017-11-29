@@ -89,7 +89,7 @@
             this.btnFacturas.Name = "btnFacturas";
             this.btnFacturas.Size = new System.Drawing.Size(129, 40);
             this.btnFacturas.TabIndex = 13;
-            this.btnFacturas.Text = "Manejo de facturas";
+            this.btnFacturas.Text = "Facturas";
             this.btnFacturas.UseVisualStyleBackColor = true;
             this.btnFacturas.Click += new System.EventHandler(this.btnFacturas_Click);
             // 
@@ -109,7 +109,7 @@
             this.btnPagos.Name = "btnPagos";
             this.btnPagos.Size = new System.Drawing.Size(127, 40);
             this.btnPagos.TabIndex = 15;
-            this.btnPagos.Text = "Pagos";
+            this.btnPagos.Text = "Listado de pagos";
             this.btnPagos.UseVisualStyleBackColor = true;
             this.btnPagos.Click += new System.EventHandler(this.btnPagos_Click);
             // 
